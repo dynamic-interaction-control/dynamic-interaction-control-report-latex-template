@@ -1,0 +1,1851 @@
+%%
+%% This is file `squelette-rr.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% RR.dtx  (with options: `sample')
+%% ********************************************************************
+%% Copyright (C) 1997-1999 2004 2006-2011 INRIA/API\UU/MARELLE by Jose' Grimm
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2003/12/01 or later.
+%% An archive of the software can be found at
+%%    ftp://ftp-sop.inria.fr/marelle/RR-INRIA
+
+\documentclass[a4paper,twoside]{article}
+\usepackage[latin1]{inputenc} % ou \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} % ou \usepackage[OT1]{fontenc}
+\usepackage{RR}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{epsfig}
+%\usepackage{theorem}
+\usepackage{fancybox}
+\usepackage{shadow}
+\usepackage{float}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{psfrag}
+\usepackage{psboxit}
+
+\oddsidemargin 2mm
+\evensidemargin -1mm
+\textwidth 460 pt
+\headheight 8.67pt
+%\topmargin -15pt
+\textheight 616pt 
+
+\bibliographystyle{IEEEtran} 
+
+\def \g {{\mathfrak g}}
+\def \so {{\mathfrak s}{\mathfrak o}}
+\def \h {{\mathfrak h}}
+\def \Ad {\textnormal{Ad}}
+\def \ad {\textnormal{ad}}
+\def \ads {\textnormal{ads}}
+\def \RR {{\mathbb R}}
+\def \NN {{\mathbb N}}
+\def \ZZ {{\mathbb Z}} 
+\def \TT {{\mathbb T}}
+\def \UU {{\mathbb S}}
+\def \eps {\varepsilon}
+\def \ldef{:=}
+\def \finproof{\hfill\hbox{\vrule width1.0ex height1.5ex}}
+\def \nb {\bar n}
+\def \u {{\mathfrak u}}
+\def \se {{\mathfrak se}}
+\def \dg {\tnm{d}_G}
+\def \bg {\tnm{B}_G}
+\def \items {$\_$}
+\def \lvec{\overrightarrow}
+\def \Lie {\textnormal{Lie}}
+\def \span {\textnormal{span}}
+\def \dist {\textnormal{dist}}
+\def \SO {{\mathbb S}{\mathbb O}}
+\def \bx {{\mathbf X}}
+\def \SE {{\mathbb S}{\mathbb E}}
+
+\newcommand{\tnm}[1]{\textnormal{#1}}
+
+
+%%\usepackage[frenchb]{babel} % optionnel
+%\RRNo{Not published yet}
+%%
+%% date de publication du rapport
+\RRdate{Avril 2012}
+%%
+%% Cas d'une version deux
+%% \RRversion{2}
+%% date de publication de la version 2
+%% \RRdater{November 2008}
+%%
+\RRauthor{% les auteurs
+Pascal Morin \thanks{This author is with ISIR-UPMC, Paris, France.}%
+\and 
+Claude Samson
+  % note partag\'ee (optionnelle)
+ % \thanks[sfn]\UUhared foot note}%
+ % \and entre chaque auteur s'il y en a plusieurs
+ % \and
+%Philippe Louarn\thanks{Footnote for second author}%
+ % r\'ef\'erence \`a la note partag\'ee
+%\thanksref{sfn}
+ % liste longue pour tests de mise en page
+%\and Nicolas Bourbaki\thanks{etc} \and Andr\'e Lichnerowicz
+%\and Marcel-Paul Sch\"utzenberger \and Jacques-Louis Lions
+}
+%% Ceci apparait sur chaque page paire.
+%\authorhead{Grimm \& Louarn \& others}
+\authorhead{Morin \& Samson}
+
+%% titre francais long
+\RRtitle{Research report\\Inria}
+%% English title
+\RRetitle{Feedback control of the general two-trailers system with the Transverse Function approach}
+%%
+\titlehead{Feedback control of the general two-trailers system}
+%%
+% \RRnote{This is a note}
+% \RRnote{This is a second note}
+%%
+\RRresume{
+Le "syst\`eme g\'en\'eral \`a deux remorques" est un syst\`eme non-holonome compos\'e d'un v\'ehicule command\'e 
+de type unicycle, et de deux remorques passives dont le point d'attache est d\'eport\'e par rapport
+\`a l'axe des roues du v\'ehicule pr\'ec\'edent.  Ce syst\`eme n'est pas diff\'erentiellement plat, et ne peut 
+donc pas \^etre transform\'e en un syst\`eme chain\'e. Les m\'ethodes de commande d\'evelopp\'ees pour cette 
+derni\`ere
+classe de syst\`emes ne s'appliquent donc pas au syst\`eme g\'en\'eral \`a deux remorques. Dans ce rapport, 
+l'approche de commande par fonctions transverses est appliqu\'ee \`a ce syst\`eme pour r\'esoudre le probl\`eme 
+de stabilisation de trajectoire. La commande propos\'ee assure la stabilisation pratique de trajectoires
+quelconques, i.e. qu'elles soient r\'ealisables par le syst\`eme ou non. Cette propri\'et\'e est particuli\`erement 
+int\'eressante pour les syst\`emes non diff\'erentiellement plats, sachant qu'il est difficile dans ce cas
+de d\'eterminer explicitement des trajectoires de r\'ef\'erence r\'ealisables. La m\'ethode 
+propos\'ee est valid\'ee
+par des r\'esultats de simulation illustrant, outre la propri\'et\'e de stabilisation pratique \'evoqu\'ee 
+pr\'ec\'edemment,
+la possibilit\'e de stabiliser {\em asymptotiquement} les trajectoires de r\'ef\'erence r\'ealisables et satisfaisant 
+la propri\'et\'e classique dite "d'excitation persistante", avec des performances comparables \`a celles obtenues
+avec une commande lin\'eaire synth\'etis\'ee \`a partir d'une approximation lin\'eaire du syst\`eme d'erreur.   
+}
+\RRabstract{
+The so-called "general two-trailers system" is a nonholonomic system composed of a controlled 
+unicycle-like vehicle and two passive trailers with off-axle hitching. It is not differentially 
+flat and cannot be transformed into the chained form system. Methods developed for this latter 
+class of systems thus do not apply. The Transverse Function (TF) approach is here used to solve 
+the trajectory tracking problem for this system. The proposed control solution 
+yields  practical stabilization of {\em any} reference motion, whether it is or is not feasible. 
+Practical stabilization of non-feasible trajectories in the case of non-differently flat systems is of 
+particular interest due partly to the difficulty of planning and calculating desired feasible state reference motions.
+The method is illustrated by simulation results which show that, in addition to 
+the unconditional practical stabilization property evoked above, {\em asymptotic} stabilization of 
+{\em feasible} and persistently exciting motions can also be achieved with the same performance as
+local stabilizers derived from a linear approximation of the tracking-error equations.}
+%%
+\RRmotcle{Syst\`eme g\'en\'eral \`a remorques, syst\`eme non-holonome, fonction transverse, stabilisation 
+de trajectoire}
+\RRkeyword{General trailer system, nonholonomic system, transverse function, trajectory tracking}
+%%
+%% \RRprojet{Apics}  % cas d'un seul projet
+\RRprojet{Arobas}
+
+\RCSophia % Sophia Antipolis M\'editerran\'ee
+
+\include{header}
+
+% 	4.77in == \the\linewidth
+
+%%
+\begin{document}
+\RRNo{7938}
+%%
+\makeRR   % cas d'un rapport de recherche
+%\makeRT % cas d'un rapport technique.
+%% a partir d'ici, chacun fait comme il le souhaite
+
+  
+\tableofcontents 
+\newpage
+
+\section{Introduction}
+
+Nonlinear control of the so-called "$N$-trailers system" (i.e. a unicycle-like 
+vehicle with $N$ trailers) has motivated numerous studies during the past two decades. Most of them assume that 
+each trailer is  hitched at a point on the wheels' axle of the 
+preceding vehicle. This assumption implies
+that the system's kinematic model can be transformed into the canonical {\em chained form}, as
+shown by Murray and Sastry \cite{ms91} in the one-trailer case, and by S{\o}rdalen \cite{so93} in the case of an arbitrary number of trailers. 
+The wealth of stabilization techniques developed for control systems in the chained form can then be applied. Another consequence of this property is that 
+the system is differentially flat \cite{flmr95}. This allows for straightforward solutions to the path planning problem consisting essentially in the calculation 
+of "feasible" reference trajectories, i.e. state trajectories that satisfy the system's motion equations, passing through desired state configurations. While a 
+unicycle, or car, with a single off-axle hitched trailer remains
+differentially flat \cite{rflm93}, this property is lost when two or more trailers are hitched off
+axle. This latter case is usually referred to as the "general trailer system". The general 
+two-trailers system, corresponding to a unicycle vehicle with two off-axle hitched trailers, is thus the simplest example in 
+this category. The fact that, to our knowledge, no {\em exact} path planner has ever been proposed for this type of systems is much related to the system's 
+non-flatness. Although this difficulty seems, at first glance, disconnected from the trajectory 
+tracking  problem, it is in fact one of the motivations of the present study. 
+The reason is that the trajectory tracking problem, commonly defined as the problem of stabilizing a reference trajectory {\em asymptotically}, i.e. 
+with convergence of the tracking error to zero in addition to stability in the sense of Lyapunov, is well posed only when the reference trajectory is feasible. 
+The difficulty of designing feasible reference trajectories between arbitrary state configurations led, in the past, trajectory tracking methods for the general 
+trailer system to focus on very specific feasible reference trajectories, like fixed-points \cite{lms01,vo00} and circular-like 
+trajectories \cite{lms01}. The present paper takes a different route. It is based on the Transverse 
+Function (TF) approach developed by the authors in the last decade 
+(see e.g \cite{ms01-siam}, \cite{ms03}) with the prime objective of achieving the  
+{\em practical} stabilization of {\em any} --feasible or non-feasible-- reference motion. The above considerations explain why bypassing the feasibility issue is 
+of particular interest for systems which are not differentially flat. Now, practical stabilization of any reference trajectory is by no means opposed to 
+{\em asymptotic stabilization} of feasible and persistently exciting reference trajectories, which should rather be considered as a complementary, more demanding 
+and restritive, objective. The present study shows how these two objectives can be combined in a single feedback control law. However, by lack of a complete proof, 
+the zeroing of the tracking errors is only illustrated here through simulation results. 
+
+The paper is related to several previous works by the authors, and more particularly 
+to \cite{ms10-cdc} where the control of a three-segments wheeled snake-like mechanism is addressed. 
+The kinematic model equations of this wheeled mechanism and of the general two-trailers system are in fact identical. However, due to different means of 
+actuation --shape angles actuation vs. wheels actuation--  their control properties are different. In particular,
+some geometric configurations, such as aligned vehicles, are singular --and thus must be avoided-- for the snake mechanism, whereas they are not singular for 
+the trailer system. On the other hand, local controllability at these configurations, i.e. the satisfaction of the Lie Algebra Rank Condition (LARC), involves 
+Lie brackets of order three whereas it is sufficient to go to order two when the trailers are not aligned \cite{ms10-cdc}. This issue is related to singularities
+of the control Lie algebra \cite{vlo99} which, in the snake-mechanism's case, coincide with actuation singularities, and the passage through which is avoided by 
+forbidding all wheels' axles to intersect at the same point (which can be at infinity). Undulatory snake-like locomotion stems from this constraint. By contrast, 
+in the trailer's case such configurations are not singular w.r.t. the actuation and thus should be permitted, all the more so that they allow for longitudinal 
+motion without energy consuming  maneuvers. However, due to the Lie algebra singularity issue evoked previously, achieving the practical stabilization of any 
+reference trajectory turns out to be more difficult for the general two-trailers system. This fact also explains the chronology followed by the authors for the 
+studies of these two systems. With respect to \cite{ms10-cdc}, the present study shows how to deal with singular configurations in order to best exploit the 
+motion capabilities of the trailer system and, in doing so, how to overcome the superior complexity induced by the necessity of using Lie brackets of higher 
+order in the control solution.
+  
+
+The paper is organized as follows.  
+Preliminary technical recalls and notation are provided in Section \ref{sec-rec}.
+The system's kinematic model and some of its control properties are presented in Section \ref{sec-model}.  
+The main contribution, which details the control design methodology based on the application of the TF 
+approach, is presented in Section \ref{sec-control}. Comparative simulation results of the TF control solution and a controller derived from a linear approximation 
+of the system are reported in Section \ref{sec-simu}. Finally, 
+the concluding Section \ref{sec-conclu} points out future research directions.  
+
+\section{Notation and recalls}
+\label{sec-rec}
+
+
+In this paper, $x'$ denotes the transpose of a vector $x \in \RR^n$, $I_n$ is the identity matrix of dimension $(n\times n)$, and $O_{m \times n}$ is the zero-valued 
+matrix of dimension $(m \times n)$. 
+$\TT^p$ denotes the $p$-dimensional torus. 
+
+\subsection{Systems on Lie groups}
+\label{rec-lie}
+Only basic properties of systems on Lie groups will be used. A few definitions and notation are recalled hereafter. The reader is referred, e.g., to 
+\cite{ms09-itro} for more details in the context of the control of nonholonomic systems.
+
+The tangent space of a manifold $M$ at a point $q$ is denoted as $T_qM$. If $X$ is a vector field (v.f.) on $M$, the solution at time $t$ of $\dot{x}=X(x)$ with 
+initial condition $x(0)=q$ is denoted as $\exp(tX,q)$.  
+A Lie group $G$ is a manifold with a group operation $(g_1, g_2) \longmapsto g_1 g_2$ such that
+the mapping $(g_1, g_2) \longmapsto g_1 g_2^{-1}$ is smooth, with $g^{-1}$ denoting the group inverse
+of $g$.
+Let $G$ denote a connected Lie group of dimension $n$. The unit element 
+of $G$ is denoted as $e$, i.e. $\forall g \in G, \; g e=e g =g$. The left and right translation operators 
+on $G$  are denoted as $L$ and $R$ respectively, i.e. 
+$\forall (\sigma,\tau)\in G^2, \; L_{\sigma}(\tau)=R_{\tau}(\sigma)=\sigma \tau$. 
+A v.f. $X$ on $G$ is left-invariant iff 
+$\forall (\sigma, \tau) \in G^2, \; dL_{\sigma}(\tau) X(\tau)=X(\sigma   \tau)$, with $df$ denoting  the differential of a function $f$. The Lie algebra --of 
+left-invariant v.f.-- of the group $G$
+is denoted as $\g$. If $X \in \g$, $\exp(tX)$ is used as a short notation of $\exp(tX,e)$. A driftless control system 
+$\dot{g}=\sum_{i=1}^m X_i(g) \xi_i$ on $G$  is said to be left-invariant on $G$ 
+if the control v.f. $X_i$ are left-invariant. 
+With $f$, $g$, and $h$ denoting  smooth curves on $G$, one has (omitting the time index)
+\begin{equation} \label{ident1}
+\frac{d}{dt}(g f^{-1})=dR_{f^{-1}}(g)\left( \dot g-dL_{gf^{-1}}(f) \dot f \right)
+\end{equation}
+and
+\begin{equation} \label{ident2}
+\frac{d}{dt}(h^{-1}g)=dL_{h^{-1}}(g) \dot g -dR_{h^{-1}g}(e) dL_{h^{-1}}(h) \dot h
+\end{equation}
+
+
+In the special case of the Lie group $G= \SE(2)$, the group operation is defined by
+\begin{equation} 
+\label{prod-se2}
+g_1 g_2 = \begin{pmatrix} \begin{pmatrix} x_1\\y_1 \end{pmatrix} 
++Q(\theta_1) \begin{pmatrix} x_2 \\ y_2 \end{pmatrix} \\ \theta_1+\theta_2 
+\end{pmatrix}
+\end{equation}
+with $g_i=(x_i,y_i,\theta_i)'$ and $Q(\theta)$ the rotation matrix in the plane 
+of angle $\theta$. The unit element is $e=(0,0,0)'$ and the inverse of 
+$g=(x,y,\theta)'$ is
+\begin{equation} 
+\label{inv-se2}
+g^{-1} = \begin{pmatrix}
+-Q(-\theta) \begin{pmatrix}
+x \\
+y 
+\end{pmatrix} \\
+-\theta
+\end{pmatrix}
+\end{equation}
+One deduces from \eqref{prod-se2} that
+\begin{equation}
+\label{dlse2}
+dL_{g_1}(g_2)= \begin{pmatrix}
+Q(\theta_1) & 0_{2\times1} \\
+0_{1\times2} & 1
+\end{pmatrix}
+\end{equation}
+and
+\begin{equation}
+\label{drse2} 
+dR_{g_2}(g_1) = \begin{pmatrix}
+I_2 & Q(\theta_1) \begin{pmatrix} -y_2 \\ y_1 \end{pmatrix} \\
+0_{1\times2} & 1
+\end{pmatrix}
+\end{equation}
+The family $\bx=\{X_1,X_2,X_3\}$ of v.f. defined by $X_i(g) = X(g) e_i,  \; i =1,2,3$ with
+\begin{equation}
+\label{xg-se2}
+X(g) = \bar Q(\theta):= \begin{pmatrix}
+Q(\theta) & 0_{2\times1}  \\
+0_{1 \times 2} & 1
+\end{pmatrix}
+\end{equation}
+and $e_1,e_2,e_3$ the canonical basis vectors of $\RR^3$, constitutes a basis of left-invariant vector fields. 
+
+\subsection{Transverse Functions}
+\label{tf-subsec}
+Notions about transverse functions are recalled --see e.g. \cite{ms03} for more details.
+Let $\bx=\{X_1, \ldots, X_m\} $ denote a family of smooth v.f. $X_1, \ldots, X_m$ 
+on a $n$-dimensional manifold $M$. $\bx$ satisfies the Lie Algebra Rank Condition (LARC) at some point $q_0$ if $\tnm{Lie}(\bx)(q_0)= T_{q_0} M$ with 
+\[
+\tnm{Lie}(\bx)=
+\span \{X_i, [X_i,X_j] \, , [X_i, [X_j,X_k] \, , \ldots ; i,j,k, \ldots =1,\ldots,m \}
+\]
+and $\tnm{Lie}(\bx)(q) = \{ X(q) : X \in \tnm{Lie}(\bx) \}$. Given a compact manifold $K$,
+a smooth function 
+$f: K \longrightarrow M$ is {\em transverse to} $\bx$ if, for any $\alpha \in K$, 
+\begin{equation}
+\label{trans}
+\tnm{span} \{X_1(f(\alpha)),  \ldots, X_m(f(\alpha)), df(\alpha)(T_{\alpha} K) \}
+= T_{f(\alpha)} M
+\end{equation}
+with $df$ the differential of $f$.
+Note that the dimension of $K$ must be at least equal to $(n-m)$. 
+Given $q_0 \in M$ such that the family $\bx$ satisfies
+the LARC at $q_0$, the ``Transverse Function theorem'' in \cite{ms01-siam} ensures the existence of  a family $(f^\eps)_{\eps>0}$ of functions transverse to $\bx$, with $\max_{\alpha} \dist(f^\eps(\alpha),q_0) \rightarrow 0$ as $\eps \rightarrow 0$, where ``$\dist$'' denotes any distance locally defined in the neighborhood of $q_0$. 
+
+We slightly generalize the definition of a transverse function to any smooth function 
+$f: K \times \RR \longrightarrow M$  by requiring that for any 
+fixed time value $t$, the function $\alpha \longmapsto f(\alpha, t)$ is transverse in the above sense.
+
+\section{Modeling and properties of the control Lie algebra}
+\label{sec-model}
+The general two-trailers system, whose view from above is sketched in Fig. \ref{fig-trailer}, is composed of a unicycle-like
+vehicle pulling two trailers with off-axle hitch points. The control inputs are the unicycle linear 
+velocity $v_\ell^0$ and its angular velocity $\omega^0$. The two
+trailers are passive. For simplicity, for $i=1,2$ the distance between the 
+center $P_i$ of trailer $i$ and its hitching point $L_i$, and the distance between $L_i$ and 
+$P_{i-1}$ are set equal to one.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.6\textwidth]{./toto.ps}
+\caption{General two-trailer system }
+\label{fig-trailer}
+\end{figure} 
+
+\subsection{Modeling}
+
+For symmetry reasons, a body-fixed frame ${\cal R}_c$ with origin $P_1$ is attached to the mid-vehicle, i.e. the first trailer. 
+The configuration of this vehicle with respect to an inertial frame 
+${\cal R}_0$ is thus characterized by
+\[
+g = \begin{pmatrix}
+x \\
+y \\
+\theta
+\end{pmatrix} \in \SE(2)
+\] 
+with $x$ and $y$ the coordinates of $P_1$ in ${\cal R}_0$, and $\theta$ the orientation of 
+${\cal R}_c$ w.r.t. ${\cal R}_0$.  The complete configuration vector of the system is 
+given by $(g, \varphi) \in \SE(2) \times \TT^2$ with
+\[
+\varphi = \begin{pmatrix}
+\varphi_1 \\
+\varphi_2
+\end{pmatrix} \in \TT^2
+\]
+the vector of hitch angles, also called the "shape vector" of the system.
+Let $v_\ell^1$ and $\omega^1$ denote the linear and angular velocities of the first trailer. Then
+\begin{equation}
+\label{kin-se2}
+\left \{
+\begin{array}{lcl}
+\dot  x & = & v_\ell^1 \cos \theta \\
+\dot  y & = & v_\ell^1 \sin \theta \\
+\dot \theta & = & \omega^1
+\end{array}
+\right.
+\end{equation}
+From now on, $v= (v_\ell^1, \omega^1)'$ will be the considered as the vector of control inputs. It is related to the unicycle's 
+velocity vector $(v_\ell^0,v_\theta^0)'$ according to the biunivocal transformation
+\[
+v= Q(\varphi_1) \begin{pmatrix}
+v_\ell^0 \\[1ex]
+-\omega^0
+\end{pmatrix}
+\]
+The classical non-slipping assumption associated with wheel-ground contact, applied to both
+trailers, yields the following two nonholonomic constraints:
+\[
+\begin{array}{l}
+-v_\ell^1 \sin \varphi_1 + \omega^1(1+\cos \varphi_1) + \dot \varphi_1 = 0 \\ 
+v_\ell^1 \sin \varphi_2 - \omega^1(1+\cos \varphi_2) + \dot \varphi_2 =0
+\end{array}
+\]
+In matrix form these equations can be written as
+\begin{equation}
+\label{kin-shape}
+\dot \varphi  =  A_\varphi(\varphi) v
+\end{equation}
+with
+\begin{equation}
+\label{defA}
+A_\varphi(\varphi) = \begin{pmatrix}
+\sin \varphi_1 &  -1-\cos \varphi_1 \\
+-\sin \varphi_2 & 1+\cos \varphi_2
+\end{pmatrix}
+\end{equation}
+Eq. (\ref{kin-se2}-\ref{kin-shape}) define a kinematic control system for the trailer system with
+$v$ as the control input. 
+The following change of coordinates
+\begin{equation} \label{eta} 
+\varphi \longmapsto \eta = \begin{pmatrix}
+\eta_1 \\
+\eta_2
+\end{pmatrix}
+= \begin{pmatrix}
+\tan \frac{\varphi_1}{2} \\
+\tan \frac{\varphi_2}{2}
+\end{pmatrix}
+\end{equation}
+is well defined away from the ``jack-knife'' angles $\varphi_{1,2}=\pi$ and is useful to avoid these
+``bad'' hitch angle values. It also simplifies the control system equations. 
+Indeed, from (\ref{kin-se2}-\ref{kin-shape}) one has
+\begin{equation}
+\label{def-eta}
+\dot \eta = A(\eta) v \, , \quad 
+A(\eta)= \begin{pmatrix}
+\eta_1 & -1 \\
+- \eta_2 & 1
+\end{pmatrix}
+\end{equation}
+so that each shape variable $\eta_i$ now satisfies a polynomial differential equation. 
+By regrouping relations \eqref{kin-se2} and \eqref{def-eta} one obtains the following driftless control model :
+\begin{equation}
+\label{mod-cont}
+\left \{
+\begin{array}{lcl}
+\dot g & = & X(g) C v \\
+\dot \eta & = & A(\eta) v
+\end{array}
+\right.
+\end{equation}
+with $X(g)$ defined by \eqref{xg-se2} and 
+\begin{equation}
+\label{def-C}
+C= \begin{pmatrix}
+1 & 0 \\
+0 & 0 \\
+0 & 1
+\end{pmatrix}
+\end{equation}
+Setting $\xi=(g',\eta')'$, this system may also be written as 
+\begin{equation}
+\label{sys-xi}
+\dot \xi = Z_1(\xi) v_1 + Z_2 v_2
+\end{equation}
+with
+\begin{equation} 
+\label{Z1-Z2}
+Z_1(\xi)= \begin{pmatrix} 
+\cos \xi_3 \\ \sin \xi_3 \\ 0 \\ \xi_4 \\ -\xi_5
+\end{pmatrix} , \; 
+Z_2=\begin{pmatrix} 
+0 \\ 0 \\ 1 \\ -1 \\ 1 
+\end{pmatrix}
+\end{equation}
+\subsection{Properties of the control Lie algebra}
+
+The following proposition recalls controllability properties of System \eqref{sys-xi} 
+and establishes other properties which play a key role in the forthcoming control design.
+
+\begin{proposition}
+\label{prop1}
+The family of v.f.  $\mathbf{Z}= \{Z_1,Z_2\}$ 
+satisfies the following properties:
+\begin{enumerate}
+\item $\tnm{dim} \, \tnm{Lie}(\mathbf{Z})(\xi) = \tnm{dim}(\xi)$ for any $\xi$, i.e. the LARC is satisfied at any point.
+\item With $Z_3= [Z_1,Z_2],  Z_4= [Z_1,Z_3], Z_5= [Z_2,Z_3]$, $Z_6= [Z_1,Z_4]$, and $Z_7= [Z_2,Z_5]$, one has
+\[
+\begin{array}{ll}
+\tnm{Lie}(\mathbf{Z}) & =  
+\span_{\RR} \{ Z_1, \ldots,Z_5, Z_6\} \\
+  & = \span_{\RR} \{ Z_1, \ldots,Z_5, Z_7\}
+\end{array}
+\]
+\item $[Z_1,Z_5]=[Z_2,Z_4]=0$.
+\end{enumerate}
+\end{proposition}
+\noindent {\bf Proof:} The proof follows by a direct calculation of the Lie brackets of $Z_1, Z_2$ up to 
+the fourth order. \finproof 
+ 
+\section{Control design}
+\label{sec-control}
+
+\subsection{Control objective}
+Given a (any) reference Cartesian motion for the trailer system, specified by a reference  
+trajectory  $g_r(.)=(x_r,y_r,\theta_r)'(.) \in \SE(2)$, one of the 
+control objectives is to stabilize at zero the tracking error defined by 
+\begin{equation} \label{tracking-errors}
+\tilde{g}=g_r^{-1}g
+\end{equation}
+More precisely, the objective is to achieve the {\em practical} stabilization of $\tilde g=0$, i.e. the stabilization of a set inside a given neighborhood of $\tilde g=0$, having in mind that the more demanding objective of {\em asymptotic} 
+stabilization of $\tilde g=0$ is possible only when the reference trajectory $g_r$ is feasible for the mid-vehicle. In view of \eqref{mod-cont} this latter constraint implies that the reference frame lateral velocity, i.e. the second component of the vector $v_r$ defined by $\dot{g}_r= X(g_r) v_r$, is identically equal to zero. In addition, the control law must ensure the boundedness of the internal shape vector 
+$\eta$ so as to prevent the unicycle and its trailers from colliding into each other, a phenomenom known as the "knife-edge" effect. Respecting this constraint constitutes in fact the real challenge, since otherwise it would suffice to control one of the vehicles without paying attention to the others. Another (complementary) objective is to achieve the {\em asymptotic} stabilization of {\em feasible} trajectories, i.e. the asymptotic stabilization of $\tilde g=0$. This property implies that $v$ converges asymptotically to $v_r$ and that along the reference trajectory $\eta$ satisfies the following relation (compare with \eqref{def-eta})
+\begin{equation}
+\label{closed-form}
+\dot \eta= A(\eta) (v_{r,1},v_{r,3})'
+\end{equation}
+For arbitrary time functions $v_{r,1},v_{r,3}$, this system of equations does not admit closed-form solutions. This raises the difficulty of specifying a reference value $\eta_r$ for $\eta$. Note, however,
+that
+\begin{equation}
+\label{defetar}
+\eta_{r,1} = \eta_{r,2} = c_r := \frac{v_{r,3}}{v_{r,1}}
+\end{equation}
+is a solution when the ratio $v_{r,3}/v_{r,1}$ is constant. This case corresponds to motions along straight lines and circles, with $c_r$ the associated curvature. Provided that the linearized system along these trajectories is controllable --a property easily established when $v_{r,1}(t)>\epsilon>0$-- one can also apply classical linear control techniques to stabilize such trajectories.
+For the sake of completeness, a control law of this type is derived in Section \ref{sec-simu} and its performance compared in simulation with the more complex, but also more versatile, TF control solution here proposed. 
+
+
+\subsection{Extension to a system on a Lie group}
+\label{extension}
+Although System \eqref{sys-xi} is not a system on a Lie group, 
+Property 2 of Proposition \ref{prop1} points out that the Lie algebra generated by $Z_1,Z_2$ is 
+finite-dimensional, of dimension equal to six. This implies that there is a Lie group associated with this Lie 
+algebra and that the v.f. $Z_1, Z_2$ can be "lifted" to left-invariant v.f. on a 
+$6$-dimensional manifold. This property, which to our knowledge has not been reported before in
+the literature, will be exploited further for the control design.
+
+\begin{theorem}
+\label{th1}
+Consider the dynamic extension of \eqref{sys-xi} defined by
+\begin{equation} \label{mod-contex}
+\dot{\bar{\xi}}=\bar Z_1(\bar{\xi}) v_1+ \bar Z_2 v_2
+\end{equation}
+with
+\[
+\bar{\xi}=\begin{pmatrix} \xi \\ \bar{\xi}_6 \end{pmatrix}~,~\bar Z_1(\bar{\xi})=
+\begin{pmatrix} Z_1(\xi) \\ 1 \end{pmatrix}~,~\bar Z_2=\begin{pmatrix} Z_2 \\ 0 \end{pmatrix}
+\]
+Then, 
+\begin{enumerate}
+\item $\mathbf{\bar Z}= \{\bar Z_1,\bar Z_2\}$ satisfies Properties 1, 2, and 3 of 
+Proposition~\ref{prop1}.
+\item The v.f. $\bar Z_1,\bar Z_2$  are left-invariant on $\SE(2) \times \RR^3$ with respect to the group operation
+defined by 
+\begin{equation}
+\label{prod-extend}
+x \bullet y = 
+\begin{pmatrix}
+g_x g_y \\
+x_4 \exp(y_6) + y_4  \\
+x_5 \exp(-y_6)+ y_5  \\
+x_6 + y_6
+\end{pmatrix}
+\end{equation}
+with $g_x$ and $g_y$ denoting the first three components of $x$ and $y$ respectively. 
+\item The differentials of the left and right translation operators associated with the group operation
+\eqref{prod-extend} are given by
+\[
+dL_x(y)=\begin{pmatrix} \bar Q (x_3) & O_{3 \times 3} \\ O_{3 \times 3} &
+\begin{pmatrix} 1 & 0 & x_4 \exp(y_6)\\0 & 1 & -x_5 \exp(-y_6) \\ 0 & 0 & 1 \end{pmatrix}
+\end{pmatrix}
+\]
+and
+\[
+dR_y(x)=\begin{pmatrix}
+dR_{1,1}(x_3,y_{1,2}) & O_{3 \times 3}\\
+O_{3 \times 3} & dR_{2,2}(y_6)
+\end{pmatrix}
+\]
+with
+\[
+dR_{1,1}(x_3,y_{1,2})=\begin{pmatrix} I_2  & Q(x_3) \begin{pmatrix} -y_2 \\ y_1 \end{pmatrix} \\ 0_{2 \times 1} 
+& 1 \end{pmatrix} \, , \quad 
+dR_{2,2}(y_6)=\begin{pmatrix} \exp(y_6) & 0 & 0 \\0 & \exp(-y_6) & 0 \\ 0 & 0 & 1 \end{pmatrix}
+\]
+\end{enumerate}
+\end{theorem} 
+\noindent {\bf Proof:} The proof consists of basic calculations. \finproof
+\vspace{.2cm}
+
+\noindent {\em Remark and correction of \cite[Prop. 2]{ms08-ifac}:}
+Except for the Lie group invariance property, the control v.f. of System \eqref{mod-contex} share the 
+same properties as the control v.f. of  System \eqref{sys-xi}. In particular, one verifies that the
+linearization of System \eqref{mod-contex} along feasible reference trajectories --for which $v_{r,2}\equiv 0$-- associated 
+with constant reference velocities $v_{r_1}$ and $v_{r_3}$ is also controllable when $v_{r,1} \neq 0$. This property constitutes a counter-example to an earlier result, namely \cite[Prop. 2]{ms08-ifac}, which points out conditions on the structure of a control Lie algebra that are necessary to the controllability of a linear approximation along feasible trajectories generated with constant control inputs. It also gives us the opportunity to indicate that the proof of this result is correct when a complementary assumption of homogeneity upon the control v.f. is made. Since the control v.f. of \eqref{mod-contex} are not homogeneous w.r.t. any dilation, by the simple fact that they involve trigonometric functions, the above mentioned result does not apply and the controllability of the linear approximation cannot be ruled out. 
+
+\subsection{Transverse functions} \label{transverse_functions}
+Previous papers, like \cite{ms03} and \cite{ms09-cdc} for instance, point out general algorithms for the determination of transverse functions (TF) that work for any set of control v.f. which satisfy the LARC. However, given a physical system and various TF for this system, no systematic methodology exists at this time to {\em a priori} select a ``good'' candidate in terms of some performance criterion, itself not easily defined in the case of systems performing maneuvers. Let us just mention the sensible rule --reflecting the authors' own experience in this matter-- according to which the design of  TF should make use of the geometrical properties of the system's control vector fields. For instance, while the functions proposed in \cite{ms03} are defined on a torus, we showed more recently in \cite{ims09} and \cite{ms09-cdc} how to define TF on a special orthogonal group when the LARC is satisfied with first-order Lie brackets only. This latter possibility is preferable to the 
+former one for systems that exhibit specific symmetry properties (see \cite[Sec. III]{ms09-cdc} for more details).  
+More generally, it is possible to combine different definition domains so as to produce TF defined on a product of toruses and 
+special orthogonal groups. The TF proposed next, for a class of families of v.f. which includes the family $\{\bar Z_1, \bar Z_2\}$ of 
+System  \eqref{mod-contex}, belong to this third category.
+
+The following notation will be used. 
+
+1. $\Delta_\eps$ and $P$ denote constant matrices:
+\[
+\Delta_\eps = \tnm{Diag}(\eps, \eps, \eps^2,\eps^3,\eps^3) \, , \quad
+P= \begin{pmatrix}
+0 & -1 & 0 \\
+1 & 0 & 0
+\end{pmatrix}
+\]
+with $\tnm{Diag}(x_1, \ldots, x_p)$ the diagonal matrix whose ordered elements on the diagonal are $x_1, \ldots,x_p$.
+
+2. Vector-valued functions involved in the calculation of the proposed TF are
+\[
+\mu_{a_1}(\theta_1)= 
+\begin{pmatrix}
+a_{1,1} s \theta_1 \\
+a_{1,2} c \theta_1 \\
+0 \\
+\frac{a_{1,1}^2 a_{1,2}}{3} c \theta_1 \\
+-\frac{a_{1,1} a_{1,2}^2}{3} s \theta_1 
+\end{pmatrix} , 
+\delta_{a_2,a_3}(\theta_2,\theta_3)= 
+\begin{pmatrix}
+a_{2,1} s \theta_2 \\
+a_{3,1} s \theta_3 \\
+0 \\
+a_{2,2} c \theta_2 \\
+a_{3,2} c \theta_3 
+\end{pmatrix} ,
+\nu_{D}(Q)= \begin{pmatrix}
+D Q e_1 \\
+P \bar D Q e_3 
+\end{pmatrix} 
+\]
+with $Q \in \SO(3)$, $\theta_i \in \UU^1$, 
+$s \theta_i$ and $c \theta_i$ standing for $\sin \theta_i$ and $\cos \theta_i$ respectively, 
+$a_i=(a_{i,1},a_{i,2})$, and
+\begin{equation}
+\label{defdb}
+D= \tnm{Diag}(d_1,d_2,d_3) \, , \quad 
+\bar D=  \tnm{Diag}(d_2 d_3,d_1 d_3,d_1 d_2)
+\end{equation}
+
+3. Given v.f. $X_1, \ldots, X_p$ and a vector $v \in \RR^p$, $X v$ is used for 
+$\sum_{i=1}^p v_i X_i$ to shorten the notation.
+
+The following result is obtained by combining the  TF theorems in \cite{ms03} and \cite{ms09-cdc}.
+\begin{theorem}
+\label{theo2}
+Consider a Lie group $G$ with Lie algebra $\g$ and denote by $x \bullet y$ the group product of $x$ and $y$ in $G$.
+Consider two left-invariant v.f. $X_1, X_2 \in \g$ such that 
+\begin{equation}
+\label{app-prop2}
+\g = \tnm{Lie}(X_1,X_2) = \span_{\RR} \{ X_1, \ldots,X_7 \} 
+\end{equation}
+and
+\begin{equation}
+\label{app-nul}
+[X_1,X_5],  [X_2,X_4] \in \span_{\RR} \{ X_1, \ldots,X_5 \} 
+\end{equation}
+with
+\begin{equation}
+\label{app-lie}
+X_3= [X_1,X_2], \; X_4= [X_1,X_3], \; X_5=[X_2,X_3], \; X_6= [X_1,X_4] , \; X_7= [X_2,X_5]
+\end{equation}
+There exist $\bar \eps>0$  and constant parameters $a_{1,2,3}$ and $d_{1,2,3}$ such that, for any 
+$\eps \in (0, \bar \eps)$, the function $f^\eps$ defined on $\TT^3 \times \SO(3)$ by
+\begin{equation} \label{def-tfM6}
+\begin{array}{c}
+f^\eps(\theta_1,\theta_2,\theta_3,Q)=  f_3^\eps(\theta_2,\theta_3) \bullet f_2^\eps(Q) \bullet f_1^\eps(\theta_1) \\
+\text{with} \\
+\begin{array}{l}
+f_1^\eps(\theta_1)= \exp(X \Delta_\eps \mu_{a_1}(\theta_1)) \\
+f_2^\eps(Q) = \exp(X \Delta_\eps  \nu_{D}(Q)) \\
+f_3^\eps(\theta_2,\theta_3) = \exp(X \Delta_\eps \delta_{a_2,a_3}(\theta_2,\theta_3))
+\end{array}
+\end{array}
+\end{equation}
+is transverse to $X_1,X_2$.
+\end{theorem}
+\noindent The proof is given in the appendix.
+\vspace*{.3cm}
+
+\noindent This result calls for several remarks.
+
+1. From \eqref{app-prop2}, the dimension of $G$ is less than, or equal to, seven. When $\dim(G)<7$, some parameters of the TF can
+be set equal to zero. For example, if $\g= \span_{\RR} \{ X_1, \ldots,X_6 \}$, one can set $a_3=0$, and if  
+$\g= \span_{\RR} \{ X_1, \ldots,X_5\}$, one can set $a_2= a_3=0$ so that $f^\eps =  f_2^\eps(Q) \bullet f_1^\eps(\theta_1)$.  
+
+2. The rationale behind the proposed TF expressions is as follows. Three functions are involved, namely 
+$f_1^\eps$, $f_2^\eps$, and $f_3^\eps$. The role of $f_1^\eps$ is to grant
+transversality in the direction of the first-order Lie bracket $X_3=[X_1,X_2]$. More precisely, we have
+$\dot f_1^\eps = X(f_1^\eps) \eta_{\eps,a_1}(\theta_1) \dot \theta_1$ with the third component of 
+$ \eta_{\eps,a_1}$ --i.e. the coefficient of $X_3(f_1^\eps)$-- being always different from zero. Similarly, $f_2^\eps$ grants  
+transversality in the directions of the second-order Lie brackets $X_4=[X_1,X_3]$ and 
+$X_5=[X_2,X_3]$, and $f_3^\eps$ grants 
+transversality in the direction of the third-order Lie brackets $X_6=[X_1,X_4]$, $X_7=[X_2,X_5]$, 
+with $\theta_2$ yielding the
+$X_6$ direction and $\theta_3$ the $X_7$ direction.
+
+3. Let  $G=\SE(2) \times \RR^3$. By Theorem \ref{th1}, $\bar Z_1$ and $\bar Z_2$ are left invariant v.f. of $G$ and satisfy the  
+properties of Proposition \ref{prop1}. Therefore, they also satisfy the assumptions of Theorem \ref{theo2}, so that TF
+for  $\{\bar Z_1, \bar Z_2\}$ are given by \eqref{def-tfM6}. Since $\bar Z_1, \bar Z_2$ satisfy Property 2 of Proposition \ref{prop1}, 
+it follows from the above remark that one can set $a_3$ (or $a_2$ equal to zero). In other words, the dependence of $f_3^\eps$ 
+(and subsequently $f^\eps$) on two 
+variables $\theta_2$ and $\theta_3$, rather than only one --either one of them--,  is not completely necessary. 
+It can be interesting  to use non-zero values for both pairs of parameters because there is no 
+reason to favor one of the Lie brackets $X_6$ and $X_7$ w.r.t the other. We have also verified that this redundancy
+grants more freedom as for the determination of the parameters $a_{1,2,3}$ for which the transversality property holds.   
+
+4. Once given the family of functions \eqref{def-tfM6}, it remains to determine values of the parameters 
+$\eps,~a_{1-3}$ and $d_{1-3}$ --i.e. ten scalars-- for which the transversality property is satisfied. The number of 
+parameters can be brought back to three because the proof of Theorem \ref{theo2} can be worked out with 
+$a_{1,1}=a_{1,2}= d_j$ ($j=1,2,3$), $a_{2,1}=a_{3,1}$, and $a_{2,2}=a_{3,2}= a_{2,1}^3$. However, using a larger number 
+of parameters yields more flexibility in the control 
+performance and the monitoring of the tracking errors. This can also be useful for the control of other systems 
+that satisfy the 
+assumptions of Theorem \ref{theo2}. For the simulation results reported further on, and in the absence of a better method to characterize a ``good'' set, we have essentially applied a brute ``guess and check'' method which allowed us to find out values for which we are reasonably confident --after testing on various feasible and non-feasible trajectories-- that they yield transversality and acceptable overall performance of the controller.
+
+
+\subsection{Tracking error system}
+From  \eqref{ident2}, \eqref{dlse2}, \eqref{drse2},  \eqref{mod-cont}, and \eqref{tracking-errors}, it follows that 
+\begin{equation} 
+\label{error-system}
+\left \{
+\begin{array}{lcl}
+\dot{\tilde{g}} & = & X(\tilde g) C v +p_g(\tilde{g},v_r)\\
+\dot{\eta} & = & A(\eta) v 
+\end{array}
+\right.
+\end{equation}
+with \[
+p_g(\tilde{g},v_r)= -\begin{pmatrix}
+1 & 0 & -\tilde{g}_2 \\
+0 & 1 & \tilde{g}_1 \\
+0 & 0 & 1 
+\end{pmatrix} v_r
+\]
+the additive ``perturbation'' arising from the motion of the reference frame. 
+Setting now
+\[
+\xi=\begin{pmatrix}
+\tilde{g}\\
+\eta
+\end{pmatrix}
+\]
+this error-system may also be written as
+\begin{equation} \label{error-systembis}
+\dot{\xi}=Z_1(\xi)v_1+Z_2v_2+p_{\xi}(\xi,v_r)
+\end{equation}
+with $Z_1$, and $Z_2$ defined by \eqref{Z1-Z2}, and
+\begin{equation} \label{pxi}
+p_{\xi}(\xi,v_r)=\begin{pmatrix} p_g(\tilde{g},v_r) \\ 0_{2 \times 1} \end{pmatrix}
+\end{equation}
+A dynamic extension, corresponding to the lifting of $Z_1$ and $Z_2$ to $\bar Z_1$ and $\bar Z_2$ evoked in Theorem \ref{th1}, is
+\begin{equation} \label{mod-contex-err}
+\dot{\bar{\xi}}=\bar Z_1(\bar{\xi}) v_1+ \bar Z_2 v_2 +\bar{p}_{\bar{\xi}}(\bar{\xi},v_r,\dot{\eta}_r)
+\end{equation}
+with $\bar{p}_{\bar{\xi}}=(p_{\xi}',0)'$. The feedback control design reported in the next two sections uses the left-invariance of $\bar Z_1$ and $\bar Z_2$, and the transverse functions determined in Section \ref{transverse_functions}, in order to {\em practically} stabilize the point $\xi=0$ for any reference trajectory $g_r(.)$, and {\em asymptotically} stabilize this point in the particular case of feasible trajectories composed of straight lines and circles.
+ 
+\subsection{Practical stabilizers}
+
+We first recall how Theorem \ref{th1} can be used for control design purposes \cite{ms03}. 
+Let $\bar f$ denote a smooth function defined on $K \times \RR$, with $K$ a $\ell$-dimensional compact manifold. 
+Let $(\frac{\partial \bar f}{\partial \alpha})_i$, $i=1,\ldots,\ell$ denote a family of v.f. such that --for short, 
+and with a slight abuse of notation
+\[
+\dot{\bar f}(\alpha,t)=\frac{\partial \bar f}{\partial \alpha}(\alpha,t) \omega 
++ \frac{\partial \bar f}{\partial t}(\alpha,t)
+\]
+for some $\ell$-dimensional ``frequency'' vector $\omega$.
+Consider the ``modified'' error $\bar{z}=\bar{\xi} \bullet {\bar f}^{-1}$. Several indexes are purposely
+ skipped in forthcoming relations in order to lighten up the notation. From \eqref{ident2} and \eqref{mod-contex-err}, and 
+using the invariance of $\bar Z_1$ and $\bar Z_2$,
+\[
+\begin{array}{lll}
+\dot{\bar{z}} & = & dR_{\bar f^{-1}}(\bar{\xi}) \left( \dot{\bar{\xi}}-dL_{\bar{z}}(\bar f) \dot{\bar f} \right) \\
+~ & = &  dR_{\bar f^{-1}}(\bar{\xi})dL_{\bar{z}}(\bar f) \left( \bar{Z}_1(\bar f)v_1+\bar{Z}_2 v_2 -
+\frac{\partial \bar f}{\partial \alpha} \omega \right) 
++   dR_{\bar f^{-1}}(\bar \xi) \left( \bar{p}_{\bar{\xi}}- dL_{\bar{z}}(\bar f) 
+\frac{\partial \bar f}{\partial t} \right)
+\end{array}
+\]
+This relation may also be written as
+\begin{equation} \label{dotz}
+\dot{\bar{z}}=\bar{B} \begin{pmatrix} v \\ \omega \end{pmatrix} + \bar{p}
+\end{equation}
+with
+\[
+\begin{array}{l}
+\bar{p}=dR_{\bar f^{-1}}(\bar \xi) \left( \bar{p}_{\bar{\xi}}- dL_{\bar{z}}(\bar f) 
+\frac{\partial \bar f}{\partial t} \right)\\
+\bar{B}=dR_{\bar f^{-1}}(\bar{\xi})dL_{\bar{z}}(\bar f)H(\alpha,t) \\
+H(\alpha,t)=\begin{pmatrix} \bar{Z}_1(\bar f(\alpha,t)) & \bar{Z}_2 &  
+-\frac{\partial \bar f}{\partial \alpha}(\alpha,t) 
+\end{pmatrix}
+\end{array}
+\]
+The transverslity of the function $\bar f$ w.r.t. $\bar{Z}_1$ and $\bar{Z}_2$ means that the $6 \times (\ell+2)$ 
+dimensional matrix-valued function $H$ is of full rank (equal to 6) $\forall (\alpha,t)$. This in turn implies 
+that $\bar{B}$ is a full-rank matrix-valued function. Using the pair $(v,\omega)$ as an extended control input, it is 
+then simple to design a feedback control which exponential stabilizes $\bar{z}=0$. Note, however, that we are only 
+interested here in controlling the first five components of $\bar{z}$, since $\bar{z}_6=(\bar{\xi}_6-f_6)$ involves the variable $\bar{\xi}_6$ which does not correspond to any physical entity. 
+Let $z$ denote the vector regrouping these five components, $p$ denote the first five components of $\bar{p}$, 
+and $B$ denote the $5 \times (\ell+2)$-dimensional matrix formed with the first five lines of $\bar{B}$, so that
+\begin{equation}
+\label{sysz}
+\dot{z}=B \begin{pmatrix} v \\ \omega \end{pmatrix} + p
+\end{equation}
+One verifies that $z$, $\bar{B}$ (and thus $B$), as well as $\bar{p}$ (and thus $p$) do not depend on the 
+``extra'' variable $\bar{\xi}_6$, so that these terms can be calculated without having to compute this variable.   
+Now, since $B$ is also of full rank (equal to 5), it is simple to define $v$ and $\omega$ so as to achieve
+the exponential stabilization of $z=0$. Take, for instance,
+\begin{equation} \label{control}
+\begin{pmatrix} v \\ \omega \end{pmatrix}= -B^{\dagger} (k z +p) \, , \quad k>0
+\end{equation}
+with $B^{\dagger}= B'(B B')^{-1}$ the Moore-Penrose right pseudo-inverse of $B$. 
+This yields the closed-loop equation $\dot z = -k z$ so that 
+the tracking error $g_r^{-1} g$ converges  to $\bar f_g$ --the vector composed of the 
+first three components of $\bar f$-- and $\eta$ converges to $\bar f_{\eta}$ --the 
+vector composed of the fourth and fifth components of $\bar f$. There remains to specify $\bar f$. 
+A possibility is given by $\bar f= f^\eps$, with $f^\eps$ defined in
+Theorem \ref{theo2} and constant parameters $\eps, a_{1,2,3}, d_{1,2,3}$ that ensure the 
+transversality of $f^{\epsilon}$. Then, $\alpha=(\theta_1,\theta_2,\theta_3,Q)$ and $\bar f$ ranges in a compact 
+set, so that practical
+stabilization of any reference trajectory for the general two-trailers system follows. Decreasing $\eps$ improves
+the tracking precision, since $f^\eps$ uniformly tends to the null vector when $\eps$ tends to zero, but also renders $(B B')$ closer to a singular matrix with the common consequence of increasing the intensities of the control inputs $v$ and $\omega$, and thus the frequency of maneuvers, especially when the reference trajectory is not feasible.
+
+
+
+\subsection{Asymptotic stabilization of reference trajectories with constant curvature}
+It is possible to modify the practical stabilizer \eqref{control} so as to allow for the asymptotic 
+stabilization of feasible reference trajectories. Rewrite System \eqref{sysz} as
+\begin{equation}
+\label{sysz2}
+\dot{z}=B \begin{pmatrix} \tilde v \\ \omega \end{pmatrix} + \tilde p
+\end{equation}
+with $\tilde v= (v_1 -v_{r,1}, v_2 -v_{r,3})'$ and
+\[
+\tilde p = p + B \begin{pmatrix}
+v_{r,1} \\
+v_{r,3} \\
+0_{3\times 1}
+\end{pmatrix}
+\]
+Exponential stabilization of $z=0$ can be obtained by using \eqref{control} with $v$ and $p$ replaced by
+$\tilde v$ and $\tilde p$ respectively.  A more general control expression, yielding
+the same closed-loop dynamics for $z$ (and thus also unconditional practical stabilization of any reference 
+trajectory) is
+\begin{equation} 
+\label{control2}
+\begin{pmatrix} \tilde v \\ \omega \end{pmatrix}= -B_W^+ (k z+ \tilde p) - (I_{8} - B^{\dagger} B) \lambda
+\end{equation}
+with
+\begin{equation}
+\label{defBP}
+B_W^+= W B'(B W B')^{-1}
+\end{equation}
+a general right pseudo-inverse of $B$, $W$ any $(\ell+2) \times (\ell+2)$ symmetric positive definite (s.p.d.) matrix, and $\lambda$ 
+any function of time whose importance in relation to the complementary objective of stabilizing feasible reference 
+trajectories asymptotically is pointed out and explicited in \cite{ms11}. More precisely,
+asymptotic stabilization of feasible reference trajectories 
+relies on specific choices of {\it i)} the transverse function $\bar f$, {\it ii)} the "correction term" 
+$\lambda$, and {\it iii)} the weight matrix $W$. Possible choices for $\bar f$ and $\lambda$ are detailed next.
+
+In view of the definition of $z$, the convergence of $z$ to zero yields the convergence of $\tilde{g}$ and 
+$(\eta-\eta_r)$ to zero when $\bar{f}_g$ converges to the unit element of $\SE(2)$ and $\bar{f}_{\eta}$ 
+converges to $(\eta_{r,1},\eta_{r,2},0)'$. This suggests to use the function $\bar{f}$ defined by
+\begin{equation}
+\label{deffbar}
+\bar f(\alpha,t) = f_r(t) \bullet (f^\eps(\alpha^*))^{-1} \bullet f^\eps(\alpha)
+\end{equation}
+with 
+\[
+\alpha=(\theta_1, \theta_2, \theta_3, Q), \quad 
+f_r(t)= (0,0,0,\eta_{r,1}(t),\eta_{r,2}(t),0)'
+\]
+and $\alpha^*$ a suitable constant element of $\TT^3 \times \SO(3)$. Indeed, the transversality of this function is ensured by the transversality of $f^\eps$ and
+$\bar f (\alpha^*,t) = f_r(t)= (0,0,0,\eta_{r,1}(t),\eta_{r,2}(t),0)'$. It thus suffices that $\alpha$ converges to $\alpha^*$ to obtain the desired convergence result.
+Following \cite{ms11}, we propose to achieve the convergence of $\alpha$ to $\alpha^*$ via the combined choices of $\alpha^*$ and the function $\lambda$ in \eqref{control2}. 
+As already pointed out, the choice of this latter function does not affect the
+exponential  convergence of $z$ to zero. On the other hand, it influences the system's zero-dynamics associated with
+$z=0$. We propose the function defined by
+\begin{equation}
+\label{defmu}
+\lambda= k_{\lambda} (0,0,\sin( \theta_1 -\theta_1^*), \bar k_{\lambda} q_s q_v', \sin( \theta_2 -\theta_2^*),
+ \sin( \theta_3 -\theta_3^*))'
+\end{equation}
+with $k_{\lambda}, \bar k_{\lambda}$ positive gains, and $(q_s, q_v)$ the scalar and vectorial part of
+the quaternion associated with $(Q^*)^{-1} Q$.  The expression \eqref{defmu} is inspired by \cite{ms11}, 
+where a similar function --used for a lower-order system-- is shown to yield the convergence of $\alpha$ to a suitably chosen element $\alpha^*$ whose correspondance, for the system here considered, is
+\begin{equation}
+\label{alpha_star}
+\alpha^*= (\theta_1^*,\theta_2^*,\theta_3^*,Q^*)= (-\pi/2,-\pi/2,0, I_3)
+\end{equation}
+The proof of convergence remains to be worked out in the present case, but simulation results alike these reported 
+in Section \ref{sec-simu} tend to show that this property is granted for feasible reference trajectories (for which $v_{r,2}=0$) with a constant curvature.
+
+\subsection{Linear asymptotic stabilizers of reference trajectories 
+with constant curvature}
+\label{sec-lin}
+
+Since the linearization of the two-trailers system is controllable along trajectories with a constant curvature, linear asymptotic 
+stabilizers of such trajectories can be obtained by applying classical control design techniques. A possible solution of this type 
+is derived next for comparison purposes. Let $\eta_r$ denote the reference shape vector defined by \eqref{defetar},
+and $\tilde{\eta}:=\eta-\eta_r$. Define the following variables:
+\begin{equation}
+\label{defcv}
+x_i= \tilde g_i \; (i=1,2,3), x_4= \frac{\tilde \eta_1- \tilde \eta_2}{2} + \tilde g_3,
+x_5= \frac{\tilde \eta_1+ \tilde \eta_2}{2} + \tilde g_2
+\end{equation}
+
+\begin{proposition}
+\label{prop2}
+The feedback law
+\begin{equation}
+\label{linear-control}
+\begin{array}{l}
+\tilde v_1=  - v_{r,3} x_2 - k_4 |v_{r,1}| x_1 \\
+\displaystyle \tilde v_2 = \frac{v_{r,1}}{1+ c_r^2} \left (k_3 (x_4 -(1+c_r^2)x_3)\tnm{sign}(v_{r,1}) 
++ \cdots \right. \\
+\phantom{toto} \left. (1+k_2) (x_5 -(1+c_r^2) x_2) +k_1 x_4 \tnm{sign}(v_{r,1}) + k_0 x_5 \right)
+\end{array}
+\end{equation}
+with $k_4>0$ and $k_{0,1,2,3}$ any  set of gain values that make the polynomial $s^4+k_3s^3+k_2 s^2 + k_1 s + k_0$ 
+Hurwitz-stable, make the reference trajectory $(g_r,\eta_r)$ localy exponentially stable provided that {\it i})
+$c_r$ is constant, {\it ii}) $v_{r,1}$ is bounded, and {\it iii}) there exist constant $T, \delta>0$ such that
+\begin{equation}
+\label{persist}
+\forall t \in \RR_{+}, \quad \int_t^{t+T} |v_{r,1}(s)| \, ds \geq \delta
+\end{equation}
+\end{proposition}
+\noindent The proof is given in the appendix.
+
+\section{Simulation results}
+\label{sec-simu}
+
+
+For the reported simulations, the time history of the reference frame velocity $v_r$ 
+is summarized in the following table. Feasible trajectories correspond to the case when $v_{r,2}=0$, $\forall t$. Controllability of the system's linear approximation along such trajectories further requires that $v_{r,1} \neq 0$. 
+\vspace{.2cm}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+$t\in (s)$ & $v_r= (\textrm{m/s, m/s, rad/s})'$ \\ \hline
+$[0,5)$ & $(0,0,0)'$ \\ 
+$[5,13)$ & $(0.6,0,0.05(t-5))'$\\
+$[13,21)$ & $(0.6,0,0.4-0.05(t-13))'$ \\
+$[21,28)$ & $(0.8,0,0)'$ \\
+$[28,35)$ & $(0,0,0.4)'$ \\
+$[35,42)$ & $(0,-0.5,0)'$ \\
+$[42,44)$ & $(-0.75(t-42),0,0.3(t-42))'$ \\
+$[44,50)$ & $(-1.5,0,0.6)'$ \\
+$[50,52)$ & $(-1.5,0,0.6-0.6(t-50))'$ \\ 
+$[52,57)$ & $(-1.5,0,-0.6)'$ \\ 
+$[57,59)$ & $(-1.5,0,-0.6+0.3(t-57))'$ \\ 
+$[59,60)$ & $(0,0,0)'$ \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{TF controller}
+The control law is defined by \eqref{control2} with 
+\[
+W= \tnm{Diag}(1,1,100,100, 100, 100, 100, 100), \quad k =3
+\]
+$\lambda$ and $\alpha^*$ given by \eqref{defmu} and \eqref{alpha_star} respectively, $k_\lambda=5 |v_{r,1}|$,
+and $\bar k_{\lambda}= 20$. 
+The transverse function used in the control law is given by \eqref{deffbar}, with $f^\eps$ given by \eqref{def-tfM6} and the parameters $\eps, a_{1,2,3}, d_{1,2,3}$ of this function chosen as follows
+\[
+\begin{array}{c}
+\eps= 0.6, a_1= (0.4\tnm{sign}(v_{r,1}),1.1), a_2= (2.5\tnm{sign}(v_{r,1}),3) \\
+a_3= (1.5,-6 \tnm{sign}(v_{r,1})), (d_1,d_2,d_3)= -\tnm{sign}(v_{r,1})(1.6,1,1)
+\end{array}
+\]
+In order to avoid singularities of the reference shape vector $\eta_r$ at $v_{r,1}=0$ (see \eqref{defetar}), 
+and discontinuities at time-instants when the reference velocity is itself discontinuous, the function defined by 
+\eqref{defetar} is approximated by the solution to the following differential equation
+\[
+\dot \eta_{r,i} = - k_\eta \left( \eta_{r,i} - \frac{v_{r,3} v_{r,1}}{v_{r,1}^2+ \delta^2} \right)
+\]
+Choosing $\delta$ small and $k_\eta$ large yields reference values close to these given by \eqref{defetar} when $v_{r,1}$ is 
+away from zero, and close to zero when $v_{r,1}=0$.  The simulation values are 
+$\delta= 0.01$ and $k_\eta= 5$. Note that, by design of the TF control solution, the practical stabilization property --contrary to asymptotic stabilization-- is basically independent of the choice of $\eta_r$ provided that this term is uniformly bounded.
+Another practical modification concerns the parameter $\eps$ involved in the term $f^\eps(\alpha^*)$ that we have replaced
+by
+\begin{equation}
+\label{teps}
+\tilde \eps = \eps (\tanh(v_{r,1}/\mu))^2
+\end{equation}
+with $\mu$ a small positive number, equal to $0.01$ in the simulation. Then, $\tilde \eps \approx \eps$ when $v_{r,1}$ is away from zero, and  $\tilde \eps=0$ when $v_{r,1}=0$ so that the precompensation term $f^{\tilde \eps}(\alpha^*)$ 
+in \eqref{deffbar} vanishes in this case. This is coherent with the fact that a non-zero precompensation is not useful when $v_{r,1}=0$ because 
+asymptotic stabilization of fixed points is not achievable with the present solution.
+
+Fig. \ref{fig1} shows the trajectories of the vehicule (full line) and of the reference frame (dashed line) in 
+Cartesian space. The initial position coordinates of the mid-vehicle at $t=0$ are $(x,y)= (-2,1)$, whereas these of the reference frame are $(x_r,y_r)= (0,0)$. The figure also illustrates the control's capacity to maintain the vehicle's position nearby the origin of the reference frame, whatever the trajectory of this frame.
+
+Fig. \ref{fig2} shows the time evolution of the norm of $z$. Picks occur at time-instants when the transverse function coefficients $a_i$ vary abruptly due to sign changes of $v_{r,1}$ and also fast variations of $\tilde{\eps}$ when $v_{r,1}$ gets close to zero. These
+variations could be compensated for at the control level so as to maintain $z$ equal to zero, but we 
+have chosen not to do so for the sake of simplicity and to illustrate an aspect of the controller's robustness.
+
+Finally, Fig. \ref{fig3} shows the time evolution of Cartesian tracking errors, the boundedness of the orientation error, and the 
+convergence of these errors to zero when the reference trajectory is feasible and the curvature $c_r$
+is constant, i.e when $t \in [21;28], t \in [44;50]$ and  $t \in [52;57]$.
+
+\begin{figure}[htb]
+\begin{center}
+\psfrag{x}{\scriptsize $x$}
+\psfrag{y}{\scriptsize $y$}
+\epsfig{figure=./xy-plot.eps,height=5cm,width=8cm}
+\end{center}
+\caption{TF controller. Trajectories in the $x-y$ plane}
+\label{fig1}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\psfrag{t}{\scriptsize $t$}
+\psfrag{nz}{\scriptsize $\|z\|$}
+\epsfig{figure=./z-plot.eps,height=5cm,width=8cm}
+\end{center}
+\caption{Norm of $z$ versus time}
+\label{fig2}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\psfrag{t}{\scriptsize $t$}
+\psfrag{gt}{\scriptsize $\tilde g$}
+\psfrag{gt1}{\scriptsize $\tilde g_1: -$}
+\psfrag{gt2}{\scriptsize $\tilde g_2: -.$}
+\psfrag{gt3}{\scriptsize $\tilde g_3: - -$}
+\epsfig{figure=./gt-plot.eps,height=5cm,width=8cm}
+\end{center}
+\caption{TF controller. Tracking errors in $\SE(2)$}
+\label{fig3}
+\end{figure}
+
+
+\subsection{Linear controller}
+For comparison purposes, tracking of the same reference frame trajectory with the linear controller of Section \ref{sec-lin} has also been simulated.
+The control gains $k_i$ of the linear controller are defined by $k_4=2$ and $s^4+k_3 s^3 +k_2 s^2 +k_1 s + k_0= (s+2)^4$.
+Fig \ref{lin-fig1} shows the trajectories in Cartesian space of the controlled mid-vehicule (full line) and of the reference frame (dashed line), and Fig \ref{lin-fig3} shows the time evolution of the Cartesian tracking errors. When the reference trajectory is feasible (or almost feasible) and persistently 
+exciting, the vehicule's behavior is similar to the one obtained with the TF controller. On the other hand, and as expected, the tracking errors can 
+become arbitrarily large when the reference motion is not feasible, as in the case of pure lateral reference 
+motion when $t \in [35;42]$. Another shortcoming of this solution, not visible on these figures, is the occurence of 
+the knife-edge effect when the reference motion is a pure rotation, when $t \in [28;35]$. This effect, of no consequence 
+in simulation, would of course be problematic in practice. A third shortcoming of the linear controller is its incapacity to reduce 
+the Cartesian error when the reference frame is motionless, when $t \in[0;5]$.
+
+ 
+
+\begin{figure}[htb]
+\begin{center}
+\psfrag{x}{\scriptsize $x$}
+\psfrag{y}{\scriptsize $y$}
+\epsfig{figure=./lin-xy-plot.eps,height=5cm,width=8cm}
+\end{center}
+\caption{Linear controller. Trajectories in the $x-y$ plane}
+\label{lin-fig1}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\psfrag{t}{\scriptsize $t$}
+\psfrag{gt}{\scriptsize $\tilde g$}
+\psfrag{gt1}{\scriptsize $\tilde g_1: -$}
+\psfrag{gt2}{\scriptsize $\tilde g_2: -.$}
+\psfrag{gt3}{\scriptsize $\tilde g_3: - -$}
+\epsfig{figure=./lin-gt-plot.eps,height=5cm,width=8cm}
+\end{center}
+\caption{Linear controller. Tracking errors in $\SE(2)$}
+\label{lin-fig3}
+\end{figure}
+
+
+\section{Conclusion}
+\label{sec-conclu}
+
+A new solution to the trajectory tracking problem  has been proposed for the general two-trailers system. 
+Unlike more classical, simpler, but also far less versatile control solutions proposed for this system, it yields practical stabilization of any reference trajectory, whether it is or is not feasible.
+A direct follow-up of the present work is a completion of the asymptotic stability
+analysis in the case of feasible trajectories with constant curvature. Other possible extensions include, e.g., 
+the treatment of a larger number of trailers and experimental validation of the proposed solution.
+
+
+\bibliography{./bibfile} 
+
+
+\section*{Appendix 1: Proof of Theorem \ref{theo2}}
+The following notation is used in the proof. 
+\begin{itemize}
+\item We denote by $\ell(k)$ the "length"  of the Lie bracket associated 
+with $X_k$, i.e. $\ell(1)=\ell(2)=1$, $\ell(3)=2$, $\ell(4)= \ell(5)=3$, $\ell(6)=\ell(7)= 4$.
+\item We denote by $O(\eps)$ any function which depends continuously on a parameter $\eps$ and such that $O(0)$ is the null function.
+\item For any vector $u \in \RR^n$,  $u_{p \rightarrow q}$ denotes the sub-vector of $u$ equal to 
+$(u_p, u_{p+1}, \cdots, u_q)^T$.
+\item For any v.f. $Z,Y \in \g$ and any $k \in \NN$, $\ad^k(Z) (Y)$ is the v.f. defined recursively by
+$\ad^0(Z)(Y)= Y$ and $\ad^k(Z)(Y)= [Z,\ad^{k-1}(Z)(Y)]$ for $k \geq 1$.
+\end{itemize}
+
+\noindent We show below that the function $f^\eps$ defined by \eqref{def-tfM6} is a TF for $\eps$ small
+enough and for an adequate choice of the parameters $a_1,a_2,a_3$, and $D$.
+
+From \eqref{def-tfM6}, let us rewrite $f^\eps$ as
+\[
+f^\eps = f_3^\eps f_2^\eps f_1^\eps
+\]
+where the $\bullet$ symbol for the group operation is omitted to simplify the notation, and
+\begin{equation}
+\label{def-fij}
+f_1^\eps = \exp \left( X \Delta_\eps \mu_{a_1} \right) \, , \;
+f_2^\eps = \exp \left(X \Delta_\eps \nu_D \right) \, , \;
+f_3^\eps= \exp \left( X \Delta_\eps \delta_{a_2,a_3} \right) 
+\end{equation}
+with $X= [X_1, \ldots, X_7]$,
+\begin{equation}
+\label{app-mu}
+\mu_{a_1}(\theta_1)= 
+\begin{pmatrix}
+a_{1,1} \sin \theta_1 \\
+a_{1,2} \cos \theta_1 \\
+0 \\
+\frac{a_{1,1}^2 a_{1,2}}{3} \cos \theta_1 \\
+-\frac{a_{1,1} a_{1,2}^2}{3} \sin \theta_1 \\
+0_{2 \times 1} 
+\end{pmatrix} , 
+\delta_{a_2,a_3}(\theta_2,\theta_3)= 
+\begin{pmatrix}
+a_{2,1} \sin \theta_2 \\
+a_{3,1} \sin \theta_3 \\
+0 \\
+a_{2,2} \cos \theta_2 \\
+a_{3,2} \cos \theta_3 \\
+0_{2 \times 1}
+\end{pmatrix} ,
+\nu_{D}(Q)= \begin{pmatrix}
+D Q e_1 \\
+P \bar D Q e_3 \\
+0_{2 \times 1}
+\end{pmatrix} 
+\end{equation}
+and
+\[
+\begin{array}{ll}
+\Delta_\eps & = \tnm{Diag}(\eps,\eps,\eps^2,\eps^3,\eps^3,\eps^4,\eps^4) \\
+ & = \tnm{Diag}\bigl( \eps^{\ell(1)},\eps^{\ell(2)},\eps^{\ell(3)},\eps^{\ell(4)},
+\eps^{\ell(5)},\eps^{\ell(6)},\eps^{\ell(7)}\bigr) 
+\end{array}, \quad
+P= 
+\begin{pmatrix}
+0 & -1 & 0 \\
+1 & 0 & 0
+\end{pmatrix}
+\]
+Note the slight abuse of notation since $\mu_{a_1}$, $\delta_{a_2,a_3}$, $\nu_D$, and $\Delta_\eps$ so defined 
+are not exactly the same as those defined in Section \ref{transverse_functions} (they have been extended as 
+$\RR^7$-valued functions). The resulting expression of $f^\eps$, however, is the same. 
+
+\subsection*{Expression of $\dot f^\eps$}
+We first establish the expression of $\dot f^\eps$.
+The calculation makes use of the following classical formula \cite[Pg. 105]{he78} for the derivative
+of the exponential mapping on Lie groups:
+\begin{equation}
+\label{dexp}
+\frac{d}{dt} \exp(Z+tY)_{|t=0} = \sum_{k=0}^{\infty} \frac{(-1)^k}{(k+1)!} \ad^k (Z)(Y)(\exp (Z))
+\end{equation}
+When $Z(t)$ denotes a time-varying vector field, the above expression yields
+\[
+\frac{d}{dt} \exp(Z(t)) = \sum_{k=0}^{\infty} \frac{(-1)^k}{(k+1)!} \ad^k(Z(t))(\dot Z(t))(\exp (Z(t)))
+\]
+with $\dot Z(t)$ the time-varying vector field $\frac{d}{dt} Z(t)$. Expansion of the above series yields 
+\begin{equation}
+\label{expand}
+ \frac{d}{dt} \exp(Z(t)) =
+\left( \dot Z(t) -\frac{1}{2} [Z,\dot Z](t) +\frac{1}{6}[Z,[Z,\dot Z]](t)  -\frac{1}{24} [Z,[Z,[Z,\dot Z]]](t)  + \cdots \right) (\exp(Z(t)))
+\end{equation}
+The following lemma, whose proof is given further, is used for the calculation of $\dot f^\eps$.
+\begin{boxitpara}{box}
+\begin{lemma}
+\label{lem0}
+For any $\eps$ and  any vectors $v,w \in \RR^7$,
+\begin{equation}
+\label{lem0-ad1}
+\ad^1(X \Delta_\eps v) (X \Delta_\eps w)=  [X \Delta_\eps v, X \Delta_\eps w] = X \Delta_\eps \left[
+\begin{pmatrix}
+0_{2 \times 1} \\
+M (v_{1\rightarrow 3} \times w_{1\rightarrow 3}) \\
+v_1 w_4 -v_4 w_1 \\
+v_2 w_5 -v_5 w_2
+\end{pmatrix} + O(\eps)
+\right]
+\end{equation}
+\begin{equation}
+\label{lem0-ad2}
+\ad^2(X \Delta_\eps v) (X \Delta_\eps w) = X  \Delta_\eps \left[
+\begin{pmatrix}
+0_{3 \times 1} \\
+v_{1\rightarrow2}(v_1 w_2-v_2 w_1) \\
+v_1(v_1 w_3-v_3 w_1) \\
+v_2(v_2 w_3-v_3 w_2)
+\end{pmatrix}
++ O(\eps)
+\right]
+\end{equation}
+\begin{equation}
+\label{lem0-ad3}
+\ad^3(X \Delta_\eps v) (X \Delta_\eps w) = X  \Delta_\eps \left[
+\begin{pmatrix}
+0_{5 \times 1} \\
+v_1^2(v_1 w_2-v_2 w_1) \\
+v_2^2(v_1 w_2-v_2 w_1)
+\end{pmatrix} 
++ O(\eps)
+\right]
+\end{equation}
+and 
+\begin{equation}
+\label{lem0-adk}
+\ad^k(X \Delta_\eps v) (X \Delta_\eps w) = X  \Delta_\eps O(\eps) \, , \qquad \forall k \geq 4,
+\end{equation}
+with
+\[
+ M= \begin{pmatrix}
+e_3^T \\
+P
+\end{pmatrix} = 
+\begin{pmatrix}
+0 & 0 & 1 \\
+ 0 & -1 & 0 \\
+1 & 0 & 0
+\end{pmatrix}
+\]
+\end{lemma}
+\end{boxitpara}
+\noindent \textbf{Calculation of $ \dot f_1^\eps$:} 
+
+From \eqref{def-fij}, $f_1^\eps= \exp(Z)$ with $Z= X \Delta_\eps \mu_{a_1}$. 
+Using Lemma \ref{lem0} above and the expression \eqref{app-mu} of $\mu_{a_1}$, 
+the following expressions are obtained:
+\[
+\begin{array}{l}
+~\dot Z =  X \Delta_\eps \dot \mu_{a_1} \\
+ \phantom{~\dot Z } =  X \Delta_\eps  \left( a_{1,1} \cos \theta_1, -a_{1,2} \sin \theta_1,0,
+- \frac{a_{1,1}^2 a_{1,2}}{3} \sin \theta_1, - \frac{a_{1,1}a_{1,2}^2}{3} \cos \theta_1,0,0 \right)^T \dot \theta_1 \\
+~[Z,\dot Z]  =  \ad^1(Z)(\dot Z) \\
+\phantom{~[Z, \dot Z] }   = X \Delta_\eps \left[ \left(0,0,-a_{1,1}a_{1,2},0,0, c_{a_1}(\theta_1),c_{a_1}(\theta_1) 
+\right)^T +O(\eps) \right] \dot \theta_1 \\
+~[Z,[Z,\dot Z]]   =  \ad^2(Z)(\dot Z) \\
+\phantom{~[Z,[Z,\dot Z]]}   = X \Delta_\eps \left[\left(0,0,0,-a_{1,1}^2 a_{1,2} \sin \theta_1,-a_{1,1}a_{1,2}^2 
+\cos \theta_1,0,0\right)^T+ O(\eps) \right] \dot \theta_1 \\
+~[Z,[Z,[Z,\dot Z]]]  =  \ad^3(Z)(\dot Z) \\
+\phantom{~[Z,[Z,[Z,\dot Z]]]}   =  X \Delta_\eps \left[\left(0,0,0,0,0,c_{a_1}(\theta_1), c_{a_1}(\theta_1)\right)^T 
++ O(\eps) \right] 
+\dot \theta_1 \\
+\ad^k(Z) (\dot Z)= X \Delta_\eps O(\eps) \, , \quad \forall k \geq 4
+\end{array}
+\]
+where $c_{a}()$ is a generic notation for any smooth function that depends on a parameter $a$. Even though the different
+functions $c_{a_1}$ are not necessarily the same, the same notation is used because only the existence of these functions
+is needed here. Gathering all the above expressions of $\ad^k(Z) (\dot Z)$ in \eqref{expand} yields
+\begin{equation}
+\label{df2}
+\dot f_1^\eps= X(f_1^\eps) \Delta_\eps [\bar \mu_{a_1}(\theta_1)+O(\eps)] \dot \theta_1
+\end{equation}
+with
+\begin{equation}
+\label{defmu2}
+\bar \mu_{a_1}(\theta_1)=
+\left(a_{1,1} \cos \theta_1, -a_{1,2} \sin \theta_1,\frac{a_{1,1}a_{1,2}}{2}, -\frac{a_{1,1}^2a_{1,2}}{2} \sin \theta_1, 
+- \frac{a_{1,1}a_{1,2}^2}{2} \cos \theta_1, c_{a_1}(\theta_1),c_{a_1}(\theta_1) \right)^T
+\end{equation}
+\vspace*{.2cm}
+
+\noindent \textbf{Calculation of $\dot f_2^\eps$:} 
+
+From \eqref{def-fij},  $f_2^\eps= \exp(Z)$ with $Z= X \Delta_\eps \nu_D$.
+From \eqref{app-mu},
+\begin{equation}
+\label{zzdq}
+ \dot Z = X \Delta_\eps 
+\begin{pmatrix}
+- D Q S(e_1)\\
+-P\bar D Q S(e_3) \\
+0_{2\times 3} 
+\end{pmatrix} \omega_Q
+\end{equation}
+with $S(.)$ the $3 \times 3$ matrix-valued operator associated with the cross product on $\RR^3$ and $\omega_Q$ the angular velocity 
+vector associated with $Q$, i.e. $\dot Q = Q S(\omega_Q)$. It follows from the definition \eqref{defdb} of $D$ and 
+$\bar D$ that, for any $Q \in \SO(3)$, 
+\[
+(DQ e_1) \times (DQS(e_1)\omega_Q)= \bar D ((Q e_1) \times (QS(e_1)\omega_Q))= \bar D Q S(e_1)^2\omega_Q
+\] 
+Combining with \eqref{lem0-ad1} and \eqref{zzdq} yields
+\[
+[Z, \dot Z] = 
+X \Delta_\eps
+\begin{pmatrix}
+O_{2\times 3}(\eps) \\
+- M \bar D Q S(e_1)^2 + O(\eps) \\
+c_{D}(Q)+ O(\eps) \\
+c_{D}(Q)+ O(\eps) \\
+\end{pmatrix}
+ \omega_Q 
+=
+X \Delta_\eps
+\begin{pmatrix}
+O_{2 \times 3}(\eps) \\
+- e_3^T \bar D Q S(e_1)^2 + O(\eps) \\
+- P \bar D Q S(e_1)^2 +O(\eps) \\
+c_{D}(Q)+ O(\eps) \\
+c_{D}(Q)+ O(\eps) \\
+\end{pmatrix}
+ \omega_Q 
+\]
+It then follows from \eqref{lem0-ad2} that 
+\[
+ [Z,[Z, \dot Z]]= X \Delta_\eps 
+\begin{pmatrix}
+O_{3\times 3}(\eps) \\
+-  e_{1,2}^T D Q e_1 e_3^T \bar D Q S(e_1)^2 + O(\eps) \\
+c_{D}(Q)+ O(\eps) \\
+c_{D}(Q)+ O(\eps)
+\end{pmatrix}
+\omega_Q 
+\]
+with
+\[
+e_{1,2}^T = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0
+\end{pmatrix}
+\]
+and from \eqref{lem0-ad3}  that 
+\[
+ [Z,[Z,[Z, \dot Z]]] = X \Delta_\eps 
+\begin{pmatrix}
+O_{5\times 3}(\eps) \\
+c_{D}(Q)+ O(\eps) \\
+c_{D}(Q)+ O(\eps)
+\end{pmatrix}
+\omega_Q 
+\]
+Gathering all previous expressions of $\ad^k Z (\dot Z)$ in \eqref{expand} and using \eqref{lem0-adk} yields
+\begin{equation}
+\label{app-df2}
+\dot f_2^\eps = X(f_3^\eps) \Delta_\eps \left[ \bar \nu_{D}(Q) + O(\eps) \right] \omega_Q
+\end{equation}
+with
+\begin{equation}
+\label{bnud}
+ \bar \nu_{D}(Q)= 
+\begin{pmatrix}
+- e_{1,2}^T D Q S(e_1) \\
+- e_3^T D Q S(e_1)+\frac{1}{2} e_3^T \bar D Q S(e_1)^2 \\
+\frac{1}{2} P \bar D Q (S(e_1)^2 -2 S(e_3)) -\frac{1}{6}  e_{1,2}^T D Q e_1 e_3^T \bar D Q S(e_1)^2 \\
+c_{D}(Q) \\
+c_{D} (Q)
+\end{pmatrix}
+\end{equation}
+\textbf{Calculation of $\dot f_3^\eps$:} 
+
+From \eqref{def-fij}, $f_3^\eps= \exp(Z)$ with  $Z= X \Delta_\eps \delta_{a_2,a_3}$ so that,
+\[
+\begin{array}{lcl}
+~\dot Z & = & X \Delta_\eps \left( a_{2,1} \cos \theta_2,0,0,-a_{2,2} \sin \theta_2,0,0,0 \right)^T \dot \theta_2 \\
+    & & + X \Delta_\eps \left( 0, a_{3,1} \cos \theta_3,0,0,-a_{3,2} \sin \theta_3,0,0 \right)^T \dot \theta_3
+\end{array}
+\]
+Using Lemma \ref{lem0}, the following expressions are obtained:
+\[
+\begin{array}{lcl}
+~[Z,\dot Z] & = & X \Delta_\eps \left(0,0,-a_{2,1} a_{3,1} \sin \theta_3 \cos \theta_2,0,0,-a_{2,1}a_{2,2},0 \right)^T 
+\dot \theta_2 \\
+ & & + X \Delta_\eps \left(0,0, a_{2,1} a_{3,1} \sin \theta_2 \cos \theta_3,0,0,0,-a_{3,1} a_{3,2} \right)^T 
+\dot \theta_3 \\
+\end{array}
+\]
+\[
+\begin{array}{lcl}
+~[Z,[Z,\dot Z]] & = & X \Delta_\eps \left[ \left( 0,0,0,-a_{2,1}^2 a_{3,1} \sin \theta_3 \sin \theta_2 \cos \theta_2,
+-a_{2,1}a_{3,1}^2 \sin^2 \theta_3 \cos \theta_2,0,0 \right)^T +O(\eps) \right]  \dot \theta_2 \\
+ & & + X \Delta_\eps \left[ \left( 0,0,0,a_{2,1}^2 a_{3,1} \sin^2 \theta_2 \cos \theta_3,
+a_{2,1}a_{3,1}^2 \sin \theta_2 \sin\theta_3 \cos \theta_3,0,0 \right)^T + O(\eps) \right] \dot \theta_3 
+\end{array}
+\]
+and 
+\[
+\begin{array}{lcl}
+~[Z,[Z,[Z,\dot Z]]] & = & X \Delta_\eps \left[ \left(0,0,0,0,0,-a_{2,1}^3 a_{3,1} \sin \theta_3 \sin^2 \theta_2 \cos \theta_2, 
+-a_{2,1}a_{3,1}^3 \sin^3 \theta_3 \cos \theta_2 \right)^T +O(\eps) \right] \dot \theta_2 \\
+ & & + X \Delta_\eps \left[ \left(0,0,0,0,0,a_{2,1}^3 a_{3,1}  \sin^3 \theta_2 \cos \theta_3,
+a_{2,1} a_{3,1}^3 \sin \theta_2 \sin^2 \theta_3 \cos \theta_3 \right)^T +O(\eps) \right] \dot \theta_3 
+\end{array}
+\]
+Gathering all these terms in \eqref{expand} and using \eqref{lem0-adk} again  yields
+\begin{equation}
+\label{df4}
+\dot f_3^\eps= X(f_3^\eps) \Delta_\eps \left[ \bar \delta_{a_2,a_3}(\theta_2, \theta_3) + O(\eps) \right] (\dot \theta_2, \dot \theta_3)^T
+\end{equation}
+with
+\begin{equation}
+\label{bdelta}
+ \bar \delta_{a_2,a_3}(\theta_2,\theta_3)=
+\begin{pmatrix}
+a_{2,1} \cos \theta_2 &  0 \\
+0 & a_{3,1} \cos \theta_3 \\
+\frac{1}{2} a_{2,1} a_{3,1} \sin \theta_3 \cos \theta_2  & -\frac{1}{2} a_{2,1} a_{3,1} \sin \theta_2 \cos \theta_3 \\
+-a_{2,2} \sin \theta_2  -\frac{1}{6} a_{2,1}^2 a_{3,1} \sin \theta_3 \sin \theta_2 \cos \theta_2  &
+\frac{1}{6} a_{2,1}^2 a_{3,1} \sin^2 \theta_2 \cos \theta_3 \\ 
+-\frac{1}{6} a_{2,1} a_{3,1}^2 \sin^2 \theta_3 \cos \theta_2   & 
+-a_{3,2} \sin \theta_3 + \frac{1}{6} a_{2,1}a_{3,1}^2 \sin \theta_2 \sin\theta_3 \cos \theta_3 \\
+\frac{1}{2} a_{2,1} a_{2,2} +\frac{1}{24} a_{2,1}^3 a_{3,1} \sin \theta_3 \sin^2 \theta_2 \cos \theta_2 &
+-\frac{1}{24} a_{2,1}^3 a_{3,1}  \sin^3 \theta_2 \cos \theta_3  \\
+\frac{1}{24}  a_{2,1}a_{3,1}^3 \sin^3 \theta_3 \cos \theta_2 &
+\frac{1}{2} a_{3,1} a_{3,2} -\frac{1}{24} a_{2,1} a_{3,1}^3 \sin \theta_2 \sin^2 \theta_3 \cos \theta_3 
+\end{pmatrix}
+\end{equation}
+\vspace*{.2cm}
+
+\noindent {\bf Expression of $\dot f^\eps$:}
+
+For any time functions $g_1, g_2$ on $G$ such that $\dot g_i = X(g_i) v_i$ for $i=1,2$,
+the left-invariance of the vector fields $X_i$ implies that
+\[
+\frac{d}{dt}(g_2 g_1) = dL_{g_2 g_1}(e) \left[ X(e) v_1+\Ad(g_1^{-1}) X(e) v_2 \right]
+\]
+Recall that $L$ is the left-translation operator on $G$.
+By applying this relation to the product $f_2^\eps f_1^\eps$, it follows from \eqref{df2} and \eqref{app-df2} that
+\begin{equation}
+\label{df32}
+\frac{d}{dt} (f_2^\eps f_1^\eps) = dL_{f_2^\eps f_1^\eps}(e)  \left[ X(e) \Delta_\eps (\bar \mu_{a_1}+O(\eps)) \dot \theta_1 
++\Ad((f_1^\eps)^{-1})X(e) \Delta_\eps (\bar \nu_{D}+O(\eps)) \omega_Q \right]
+\end{equation}
+where the arguments of $\bar \mu_{a_1}$ and $\bar \nu_{D}$ have been omitted. 
+Since $f^\eps= f_3^\eps f_2^\eps f_1^\eps$, we deduce from the above relation and \eqref{df4} that
+\begin{equation}
+\label{df}
+\dot f^\eps = dL_{f^\eps}(e) \bar H_{a,D}^\eps(\theta_1,\theta_2, \theta_3,Q) 
+\begin{pmatrix}
+\dot \theta_1 \\
+\omega_Q \\
+\dot \theta_2 \\
+\dot \theta_3
+\end{pmatrix}
+\end{equation}
+with
+\begin{equation}
+\label{defhb}
+\bar H_{a,D}^\eps=
+\left(
+X(e) \Delta_\eps (\bar \mu_{a_1}+O(\eps)) \quad  \Ad((f_1^\eps)^{-1}) X(e) \Delta_\eps (\bar \nu_{D}+O(\eps)) \quad
+\Ad((f_2^\eps f_1^\eps)^{-1}) X(e)  \Delta_\eps (\bar \delta_{a_2,a_3}+O(\eps)) 
+\right)
+\end{equation}
+
+\subsection*{Sufficient conditions for the transversality of $f^\eps$:}
+
+From the definition of a transverse function, \eqref{app-prop2}, and the left invariance of the v.f. $X_i$, 
+$f^\eps$ is a TF for given values of 
+$a_1, a_2, a_3$, $D$, and $\eps>0$, if and only if, 
+\begin{equation}
+\label{app-tf}
+\forall \theta_1,\theta_2, \theta_3, Q, \qquad
+\text{Im} (\bar H_{a,D}^\eps(\theta_1,\theta_2, \theta_3,Q)) + \text{span}(X_1(e),X_2(e)) = \g 
+\end{equation}
+The proof of the existence of parameters $a_1, a_2, a_3$, $D$, and $\bar \eps>0$ such that, 
+for $\eps \in (0, \bar \eps)$, \eqref{app-tf} is satisfied relies on the following lemma (whose proof is given further).
+\begin{boxitpara}{box}
+\begin{lemma}
+\label{lem-app}
+For any vectors $v, w \in \RR^7$,
+\begin{equation}
+\label{lem-eq1}
+\Ad(\exp(X \Delta_\eps v)) X(e) \Delta_\eps w = X(e) \Delta_\eps (w+\gamma(v,w) + O(\eps)) 
+\end{equation}
+with $\gamma$ a polynomial function of $v$ and $w$ which vanishes when $v=0$ or $w=0$.
+Furthermore, 
+\begin{enumerate}
+\item $\gamma_i$ is a sum of monomials of the form $c_i v_{i_1} \cdots v_{i_p} w_{i_{p+1}}$ with $p \geq 1$ and 
+$c_i$ some constant, and $\sum_{k=1}^{p+1} \ell(i_k) = \ell(i)$.
+\item When $v_3=0$,
+\begin{equation}
+\label{lem-eq2}
+\begin{array}{l}
+\gamma_3(v,w)= v_1 w_2 -v_2 w_1 \\
+\gamma_4(v,w)= v_1( w_3 +\frac{1}{2} \gamma_3(v,w)) \\
+\gamma_5(v,w)= v_2( w_3 +\frac{1}{2} \gamma_3(v,w)) 
+\end{array}
+\end{equation}
+\end{enumerate}
+\end{lemma}
+\end{boxitpara}
+\begin{comment}
+\footnote{Another interpretation of this property is that each of 
+these monomials is homogeneous of degree $\ell(i)$ w.r.t. the dilation associated with the filtration 
+$\g_1, \ldots, \g_4$ of $\g$ defined by $\g_k = \span_\RR \{ X_i: \ell(i) \leq k \}$}
+\end{comment}
+
+\noindent Since $f_1^\eps= \exp (X \Delta_\eps \mu_{a_1})$, so that $(f_1^\eps)^{-1}= \exp (-X \Delta_\eps \mu_{a_1})$ , 
+it follows from this lemma that 
+\[
+\begin{array}{ll}
+\Ad((f_1^\eps)^{-1}) X(e) \Delta_\eps (\bar \nu_{D}+O(\eps)) & = 
+X(e) \Delta_\eps (\bar \nu_D+O(\eps)+ \gamma(-\mu_{a_1},\bar \nu_{D}+O(\eps))+O(\eps)) \\
+ & = X(e) \Delta_\eps (\bar \nu_D + \gamma(-\mu_{a_1},\bar \nu_{D}) +O(\eps))
+\end{array}
+\]
+where the second equality comes from the fact that $\gamma$ is  a polynomial function of its arguments.
+Similarly, using the fact that $f_2^\eps= \exp (X \Delta_\eps \nu_{D})$ and the property $\Ad(g_1 g_2) = \Ad(g_1) \Ad(g_2)$,
+\[
+\begin{array}{r}
+\Ad((f_2^\eps f_1^\eps)^{-1}) X(e)  \Delta_\eps (\bar \delta_{a_2,a_3}+O(\eps)) 
+  = \Ad((f_2^\eps)^{-1}) \Ad(( f_1^\eps)^{-1}) X(e)  \Delta_\eps (\bar \delta_{a_2,a_3}+O(\eps)) \\
+  = \Ad((f_2^\eps)^{-1}) X(e) \Delta_\eps (\bar \delta_{a_2,a_3} +\gamma(-\mu_{a_1},\bar \delta_{a_2,a_3}) +O(\eps)) \\
+  = X(e) \Delta_\eps ( \bar \delta_{a_2,a_3} +\gamma(-\mu_{a_1},\bar \delta_{a_2,a_3}) 
++ \gamma(-\nu_D,\bar \delta_{a_2,a_3} + \gamma(-\mu_{a_1}, \bar \delta_{a_2,a_3})) + O(\eps))
+\end{array}
+\]
+Therefore, using \eqref{defhb},
+\begin{equation}
+\label{hd}
+\bar H_{a,D}^\eps=  X(e) \Delta_\eps (M_{a,D} +O(\eps))
+\end{equation}
+with
+\[
+M_{a,D} = \bigl( \bar \mu_{a_1} \quad \bar \nu_{D}+ \gamma(-\mu_{a_1},\bar \nu_{D}) \quad 
+\bar \delta_{a_2,a_3} + \gamma(-\mu_{a_1},\bar \delta_{a_2,a_3}) +
+\gamma(-\nu_D,\bar \delta_{a_2,a_3} + \gamma(-\mu_{a_1},\bar \delta_{a_2,a_3})) \bigr)
+\]
+Since $M_{a,D}$ does not depend on $\eps$, it follows from \eqref{hd} that \eqref{app-tf} is satisfied, 
+for some $a_1,a_2,a_3,D$ and for $\eps$ small provided that the $5\times 6$ matrix
+\[
+H_0(\theta_1,\theta_2,\theta_3,Q)= (0_{5 \times 2} \quad I_{5,5} ) M_{a,D} (\theta_1,\theta_2,\theta_3,Q)
+\]
+is of full rank for any $\theta_1,\theta_2,\theta_3,Q$. Note that this condition is only sufficient for 
+the transversality of $f^\eps$. In particular, when $\text{dim}(G) < 7$ the transversality of $f^\eps$ can 
+be achieved with a smaller rank of $H_0(\theta_1,\theta_2,\theta_3,Q)$.
+\vspace*{.2cm}
+
+\noindent{\bf Full rankedness of $H_0$:}
+
+Let us decompose $H_0$ as follows:
+\[
+H_0= \begin{pmatrix}
+T & V \\
+U & W
+\end{pmatrix}
+\]
+with
+\[
+\begin{array}{l}
+T =  \biggl(
+\bar \mu_{a_1,3\rightarrow 5} \quad \bar \nu_{D,3\rightarrow 5} + \gamma_{3\rightarrow5}(-\mu_{a_1},\bar \nu_D)
+\biggr) \, , \quad 
+U= \biggl(
+\bar \mu_{a_1,6\rightarrow 7} \quad \bar \nu_{D,6\rightarrow 7} + \gamma_{6\rightarrow7}(-\mu_{a_1},\bar \nu_D)
+\biggr) \\
+V=  \bigg(
+\bar \delta_{a_2,a_3,3\rightarrow5} + \gamma_{3\rightarrow5}(-\mu_{a_1},\bar \delta_{a_2,a_3}) +
+\gamma_{3\rightarrow5}(-\nu_D,\bar \delta_{a_2,a_3} + \gamma(-\mu_{a_1},\bar \delta_{a_2,a_3})) 
+\biggr) \\
+W=  \biggl(
+\bar \delta_{a_2,a_3,6\rightarrow7} + \gamma_{6\rightarrow7}(-\mu_{a_1},\bar \delta_{a_2,a_3}) +
+\gamma_{6\rightarrow7}(-\nu_D,\bar \delta_{a_2,a_3} + \gamma(-\mu_{a_1},\bar \delta_{a_2,a_3})) 
+\biggr) 
+\end{array}
+\]
+We first determine conditions under which $T$ is of full rank. The rank of this matrix is equal to the 
+rank of the matrix
+\[
+\bar T =
+\begin{pmatrix}
+T_1 \\
+T_2 +\mu_{a_1,1} T_1 \\
+T_3  +\mu_{a_1,2} T_1
+\end{pmatrix}
+\]
+with $T_i$ denoting the $i$-th row of $T$. It follows from \eqref{app-mu}, \eqref{defmu2}, and \eqref{lem-eq2} 
+that
+\[
+\begin{array}{l}
+\bar T=
+\begin{pmatrix}
+\bar \mu_{a_1,3} & \bar \nu_{D,3} -\mu_{a_1,1} \bar \nu_{D,2} +\mu_{a_1,2} \bar \nu_{D,1} \\
+0 & \bar \nu_{D,4} +\frac{1}{2} \mu_{a_1,1}(-\mu_{a_1,1} \bar \nu_{D,2} +\mu_{a_1,2} \bar \nu_{D,1})  \\
+0 & \bar \nu_{D,5} +\frac{1}{2} \mu_{a_1,2}(-\mu_{a_1,1} \bar \nu_{D,2} +\mu_{a_1,2} \bar \nu_{D,1}) 
+\end{pmatrix} \\[2em]
+ =
+\begin{pmatrix}
+\frac{a_{1,1} a_{1,2}}{2} &   \bar \nu_{D,3} -\mu_{a_1,1} \bar \nu_{D,2} +\mu_{a_1,2} \bar \nu_{D,1}  \\[1ex]
+\begin{pmatrix}
+0  \\
+0\end{pmatrix} & 
+\frac{1}{2} P \bar D Q (S(e_1)^2-2S(e_3))+ O(|D|)^3)+O(|D|)O(|a_1|^2)
+\end{pmatrix}
+\end{array}
+\]
+where the last equality comes from \eqref{defdb}, \eqref{defmu2}, and \eqref{bnud}. Since $S(e_1)^2-2S(e_3)$ is invertible,
+so that the rank of the matrix 
+$P \bar D Q (S(e_1)^2-2S(e_3))$  is equal to two  when 
+$D$ is invertible, it follows from \eqref{defdb} that the rank of $\bar T$ is equal to three  if, for example,
+$a_{1,1}=a_{1,2}= d_1=d_2=d_3>0$ is chosen small enough. 
+
+Let us now consider the terms $V$ and $W$. Let $a_{2,1}=a_{3,1} = \kappa>0$ and $a_{2,1}=a_{3,1} = \kappa^3$.
+Then, it follows from \eqref{bdelta} that 
+\begin{equation}
+\label{majdelta}
+\forall i, \quad |\bar \delta_{a_2,a_3,i}| \leq 2 \kappa^{\ell(i)} 
+\end{equation}
+and
+\[
+\begin{pmatrix}
+\bar \delta_{a_2,a_3,6} \\
+\bar \delta_{a_2,a_3,7}
+\end{pmatrix}
+=
+\frac{1}{2} \kappa^4 W_0 \quad \text{with} \quad 
+W_0= 
+\begin{pmatrix}
+1+ \frac{1}{12} \sin \theta_3 \sin^2 \theta_2 \cos \theta_2 & -\frac{1}{12} \sin^3 \theta_2 \cos \theta_3 \\
+\frac{1}{12} \sin^3 \theta_3 \cos \theta_2 & 1 -\frac{1}{12} \sin \theta_2 \sin^2 \theta_3 \cos \theta_3
+\end{pmatrix}
+\]
+Now, Property 1 of Lemma \ref{lem0} implies that $\gamma_i(-\mu_{a_1}, \bar \delta_{a_2,a_3})$ is linear in 
+$\bar \delta_{a_2,a_3}$ and only depends on the components $\bar \delta_{a_2,a_3,k}$ of  $\bar \delta_{a_2,a_3}$ such
+that $\ell(k) < \ell(i)$. This implies, using \eqref{majdelta}, that 
+$|\gamma_i(-\mu_{a_1}, \bar \delta_{a_2,a_3})| \leq c \kappa^{\ell(i)-1}$ with $c$ denoting some constant. From 
+the above definition of $V$ and $W$ one then deduces that 
+\begin{equation}
+\label{app-ineq}
+\kappa \geq 1 \Longrightarrow 
+|V_i| \leq c_i \kappa^{\ell(i+2)}  \leq c_i \kappa^3 \quad \text{and} \quad 
+W= \frac{1}{2} \kappa^4 W_0 + R,\quad  |R| \leq c_0 \kappa^3
+\end{equation}
+with $V_i$ the $i$-th row of $V$ and $c_i$, $c_0$ some constants. The possible dependence of
+these constants upon $a_1$ and $D$ is not important. Note also that the 
+above expression implies that $W$ is invertible for $\kappa$ large enough, since $W_0$ is invertible.
+
+Since $T$ is of full rank, there exist for any $(\theta_1,Q)$ three column vectors of $T$ which form a
+$3 \times 3$ invertible matrix. Without lost of generality, let us assume that these columns are the 
+three first ones and consider the $4 \times 4$ submatrix $H_0^-$ of $H_0$ obtained by 
+omiting the fourth column of $H_0$. Then,
+\[
+H_0^-=
+\begin{pmatrix}
+T^- & V \\
+U^- & W
+\end{pmatrix}
+\]
+with $T^-$ invertible. Recall that $H_0^-$ is invertible if and only if the Shur complement $W- U^- (T^-)^{-1} V$ is invertible.
+Since neither $T^-$ nor $U^-$ depend on $\kappa$, it follows from \eqref{app-ineq} that this property is satisfied 
+for $\delta$ large enough. Therefore, for any $\theta_1, \theta_2, \theta_3,Q$ there exists $\kappa>0$ such that 
+$H_0$ is of full rank. Due to the compacity of $\TT^3 \times \SO(3)$, this in turn implies the existence of 
+$\kappa>0$ such that for any  $\theta_1, \theta_2, \theta_3,Q$, the matrix $H_0$ is of full rank. \finproof
+\vspace{.3cm}
+
+\subsection*{Proof of Lemma \ref{lem0}}
+For any $\eps$ and any $v,w \in \RR^7$,
+\[
+\begin{array}{lcl}
+[X \Delta_\eps v, X \Delta_\eps v] & = & 
+\displaystyle \bigl [ \sum_{i=1}^7 X_i \eps^{\ell(i)} v_i, \sum_{j=1}^7 X_j \eps^{\ell(j)} w_j \bigr ] \\
+ & = & \displaystyle \sum_{i<j} [X_i,X_j] \eps^{\ell(i) + \ell(j)} (v_i w_j -v_j w_i)
+\end{array}
+\]
+If $\ell(i)+ \ell(j) > \max_k \ell(k) = 4$, then $[X_i,X_j]  \eps^{\ell(i) + \ell(j)} = X \Delta_\eps O(\eps)$ since 
+$\max_k \Delta_\eps(k,k)=4$ and $[X_i,X_j] \in g = \text{span}_\RR \{ X_1, \ldots, X_7 \}$. Therefore,
+\[
+[X \Delta_\eps v, X \Delta_\eps w]  =  A_1 +  X \Delta_\eps O(\eps) \quad \text{with} \quad  
+A_1=  \hspace{-.5cm}
+\displaystyle \sum_{
+\begin{scriptsize}
+\begin{array}{c}
+i<j \\
+\ell(i) + \ell(j) \leq 4
+\end{array}
+\end{scriptsize}
+} \hspace*{-.6cm}
+[X_i,X_j] \eps^{\ell(i) + \ell(j)} (v_i w_j -v_j w_i)
+\]
+The sum $A_1$ can be written as 
+\[
+\begin{array}{lcl}
+A_1  & = &
+[X_1, X_2] \eps^2 (v_1 w_2 -v_2 w_1) + [X_1,X_3] \eps^3  (v_1 w_3 -v_3 w_1) + [X_1,X_4] \eps^4  (v_1 w_4 -v_4 w_1)  \\
+ & & + [X_2, X_3] \eps^3  (v_2 w_3 -v_3 w_2) + [X_2,X_5] \eps^4  (v_2 w_5 -v_5 w_2) \\
+ & & + [X_1,X_5] \eps^4  (v_1 w_5 -v_5 w_1) + [X_2, X_4] \eps^4  (v_2 w_4 -v_4 w_2)  \\
+ & = &  X_3 \eps^2 (v_1 w_2 -v_2 w_1) + X_4 \eps^3  (v_1 w_3 -v_3 w_1) + X_6 \eps^4  (v_1 w_4 -v_4 w_1) \\
+ &  & + X_5 \eps^3  (v_2 w_3 -v_3 w_2) + X_7 \eps^4  (v_2 w_5 -v_5 w_2) \\
+ &  & + X \Delta_\eps O(\eps)
+\end{array}
+\]
+where the last equality comes from the definition \eqref{app-lie} of the $X_i$'s and from \eqref{app-nul} which allows 
+one to express
+$[X_1,X_5]$ and $[X_2,X_4]$ as a linear combination  of $X_1, \ldots, X_5$. Therefore,
+\[
+[X \Delta_\eps v, X \Delta_\eps v] = X \Delta_\eps \left[ \beta(v,w) + O(\eps \right] \, , \quad 
+\beta(v,w)= 
+\begin{pmatrix}
+0_{2 \times 1} \\
+v_1 w_2 -v_2 w_1 \\
+v_1 w_3 -v_3 w_1 \\
+v_2 w_3 -v_3 w_2 \\
+v_1 w_4 -v_4 w_1 \\
+v_2 w_5 -v_5 w_2
+\end{pmatrix}
+\]
+and \eqref{lem0-ad1} follows.
+
+Let us now establish \eqref{lem0-ad2}. From the above equation,
+\[
+\begin{array}{lcl}
+\ad^2(X \Delta_\eps v)(X \Delta_\eps w) & = & [ X \Delta_\eps v, \ad^1(X \Delta_\eps v)(X \Delta_\eps w)]\\
+ & = & \displaystyle \bigl [ \sum_{i=1}^7 X_i \eps^{\ell(i)} v_i, \sum_{j=1}^7 X_j \eps^{\ell(j)} (\beta_j(v,w) + O(\eps)) \bigr ] \\
+ & = &  \displaystyle \bigl [ \sum_{i=1}^7 X_i \eps^{\ell(i)} v_i, \sum_{j=1}^7 X_j \eps^{\ell(j)} \beta_j(v,w) \bigr ] 
+ + X \Delta_\eps O(\eps)  \\
+ & = &  A_2  + X \Delta_\eps O(\eps) \, , \quad  A_2= \hspace*{-.6cm}
+\displaystyle 
+ \sum_{
+\begin{scriptsize}
+\begin{array}{c}
+i<j \\
+\ell(i) + \ell(j) \leq 4
+\end{array}
+\end{scriptsize}
+} \hspace*{-.6cm}
+[X_i,X_j] \eps^{\ell(i) + \ell(j)} 
+(v_i \beta_j(v,w) -v_j \beta_i(v,w)) 
+\end{array}
+\]
+By using \eqref{app-lie}, \eqref{app-nul}, and the fact that $\beta_1=\beta_2=0$, one obtains
+\[
+\begin{array}{lcl}
+A_2 & = & 
+[X_1,X_3] \eps^3 v_1 \beta_3(v,w) + [X_1,X_4] \eps^4 v_1 \beta_4(v,w) \\
+ & & +[X_2,X_3] \eps^3 v_2 \beta_3(v,w) + [X_2,X_5] \eps^4 v_2 \beta_5(v,w) \\
+ & & + [X_1,X_5] \eps^4  v_1 \beta_5(v,w) + [X_2, X_4] \eps^4  v_2 \beta_4(v,w)  \\
+ & = & X_4 \eps^3 v_1 \beta_3(v,w) + X_6 \eps^4 v_1 \beta_4(v,w) + X_5 \eps^3 v_2 \beta_3(v,w) + X_7 \eps^4 v_2 \beta_5(v,w) 
++ X \Delta_\eps O(\eps)
+\end{array}
+\]
+Eq. \eqref{lem0-ad2} directly follows from the above equalities.
+
+The calculation of $\ad^3(X \Delta_\eps v)(X \Delta_\eps w)$ is similar and not reproduced here. Finally, for $k \geq 4$,
+\[
+\ad^k(X \Delta_\eps v)(X \Delta_\eps w) =O(\eps^{k+1})= O(\eps^5)
+\] 
+because $ X \Delta_\eps u = O(\eps)$ for any $u$. Relation \eqref{lem0-adk} follows by decomposing 
+$\ad^k(X \Delta_\eps v)(X \Delta_\eps w)$ on the generating family of v.f.
+ ${X_1, \ldots,X_6,X_7}$  of $\g$, and using the fact that $\max_k \Delta_\eps(k,k)= 4$. \finproof
+
+
+\subsection*{Proof of Lemma \ref{lem-app}:}
+Recall the classical property (see e.g. \cite{he78}) 
+\[
+\Ad(\exp(Z))X(e)= \exp(\ad (Z))(X)(e) = \sum_{k=0}^{+\infty} \frac{1}{k!} \ad^k(Z)(X)(e)
+\]
+Therefore,
+\begin{equation}
+\label{lem-p1}
+\Ad(\exp(X \Delta_\eps v)) X(e) \Delta_\eps w = \sum_{k=0}^{+\infty} \frac{1}{k!} \ad^k(X \Delta_\eps v)(X \Delta_\eps w)(e)
+\end{equation}
+From here, the proof easily follows by using the expressions of $\ad^k(X \Delta_\eps v)(X \Delta_\eps w)$ given in Lemma \ref{lem0}.
+\finproof
+
+
+
+\section*{Appendix 2: Proof of Proposition \ref{prop2}}
+One deduces from \eqref{error-system} that the linearized system along a
+reference trajectory with constant curvature $c_r$ is given by
+\[
+\left \{
+\begin{array}{lcl}
+\dot{\tilde g}_1 & = & \tilde v_1 + v_{r,3} \tilde g_2 \\
+\dot{\tilde g}_2 & = & v_{r,1} \tilde g_3 - v_{r,3} \tilde g_1 \\
+\dot{\tilde g}_3 & = & \tilde v_2 \\
+\dot{\tilde \eta}_1 & = & v_{r,1} \tilde \eta_1 + c_r \tilde v_1 - \tilde v_2 \\
+\dot{\tilde \eta}_2 & = &  -v_{r,1} \tilde \eta_2 - c_r \tilde v_1 + \tilde v_2
+\end{array}
+\right.
+\]
+with $\tilde{\eta}=\eta-\eta_r$. By using the change of variables \eqref{defcv}
+one obtains the following equivalent system
+\begin{equation}
+\label{linear-trailer}
+\left \{
+\begin{array}{lcl}
+\dot x_1 & =  & \tilde v_1 + v_{r,3} x_2 \\
+\dot x_2 & = &  v_{r,1} x_3 - v_{r,3} x_1 \\
+\dot x_3 & = & \tilde v_2 \\
+\dot x_4 & = &  v_{r,1} x_5 -  v_{r,1} x_2 + c_r \tilde v_1 \\
+\dot x_5 & = &  v_{r,1} x_4-  v_{r,3} x_1
+\end{array}
+\right.
+\end{equation}
+Setting $\tilde v_1=  - v_{r,3} x_2 - k_4 |v_{r,1}| x_1$ with $k_4>0$ ensures the exponential stability
+of $x_1=0$ for any $v_{r,1}$ that satisfies \eqref{persist}. The zero-dynamics associated with $x_1=0$ is
+\begin{equation}
+\label{sys-last}
+\left \{
+\begin{array}{lcl}
+\dot x_2 & = &  v_{r,1} x_3  \\
+\dot x_3 & = & \tilde v_2 \\
+\dot x_4 & = &  v_{r,1} x_5 -  (1+c_r^2)  v_{r,1} x_2 \\
+\dot x_5 & = &  v_{r,1} x_4
+\end{array}
+\right.
+\end{equation}
+Let us first assume that $v_{r,1}=1$. Then, $x_5^{(4)} = x_5^{(2)} -(1+ c_r^2) \tilde v_2$ and an exponential stabilizer 
+of the origin of the above system is thus given by
+\begin{equation}
+\label{cont1vt}
+\tilde v_2 = \frac{1}{1+ c_r^2} \left( k_3 \dddot x_5 + (1+k_2) \ddot x_5 +k_1 \dot x_5 + k_0 x_5 \right)
+\end{equation}
+with $k_{0,1,2,3}$ any set of gain values that make the polynomial $s^4+k_3s^3+k_2 s^2 + k_1 s + k_0$ 
+Hurwitz-stable. By introducing the time-scaling  $\tau = \int_0^t |v_{r,1}(\alpha)| \, d \alpha$ one then deduces
+from \eqref{cont1vt} that $\tilde v_2$ given by \eqref{linear-control} is an exponential stabilizer of the origin 
+of System \eqref{sys-last} for any $v_{r,1}$ that satisfies \eqref{persist}.
+ Since $x_1=0$ is also exponentially stable under the same condition, the origin of the complete linearized 
+system \eqref{linear-trailer} is 
+exponentially stable. Now, since the tracking-error dynamics is affine w.r.t. $v_r$, the original (non-linear) system can
+be written as
+\[
+\dot x = A(v_r) x +R(x) v_r
+\]
+with $R(0)= 0$, $\frac{\partial R}{\partial x}(0)=0$, and the origin of the linearized system $\dot x =A(v_r) x$ 
+exponentially stable.
+Local exponential stability of the origin of this system follows from the assumption that $v_r$ is bounded and 
+from classical exponential stability results \cite[Th. 4.13]{kh02}. \finproof
+
+
+
+% 
+	\newpage
+	%\bibliographystyle{IEEEtran}
+% 	\renewcommand{\bibname}{References}
+	\addcontentsline{toc}{section}{References}
+        \addcontentsline{toc}{section}{Appendix 1: Proof of Theorem \ref{theo2}}
+	\addcontentsline{toc}{section}{Appendix 2: Proof of Proposition \ref{prop2}}
+	%\bibliography{bibliography/ref_example}
+
+
+\end{document}
+\endinput
+%%
+%% End of file `squelette-rr.tex'.

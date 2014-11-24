@@ -1,0 +1,84 @@
+\usepackage{ae,aecompl}
+
+\usepackage{IEEEtrantools}
+\IEEEeqnarraydefcolsep{0}{1.5\parindent}
+\interdisplaylinepenalty=300
+
+\usepackage{color}
+\usepackage[tight,footnotesize]{subfigure}
+
+\usepackage[cmex10]{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+
+\usepackage{amsthm}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{cancel}
+
+\usepackage{enumerate}
+
+\usepackage[tight,footnotesize]{subfigure}
+
+\newenvironment{system}[1][rCL]
+{\left\lbrace\begin{IEEEeqnarraybox}[][c]{#1}}
+{\end{IEEEeqnarraybox}\right.}
+
+\theoremstyle{definition}
+\newtheorem{ttheorem}{Theorem}
+\newenvironment{theorem}{%
+\begin{ttheorem}%
+% \vspace*{-.3cm}
+}{\end{ttheorem}\vspace*{-.1cm}}
+
+\newtheorem{tlemma}{Lemma}
+\newenvironment{lemma}{%
+\begin{tlemma}%
+% \vspace*{-.3cm}
+}{\end{tlemma}\vspace*{-.1cm}}
+
+\newtheorem{tcorollary}{Corollary}
+\newenvironment{corollary}{%
+\begin{tcorollary}%
+% \vspace*{-.3cm}
+}{\end{tcorollary}\vspace*{-.1cm}}
+
+\newtheorem{tassumption}{Assumption}
+\newenvironment{assumption}{%
+\begin{tassumption}
+}{\end{tassumption}}
+
+\newtheorem{tdefinition}{Definition}
+\newenvironment{definition}{%
+\begin{tdefinition}
+}{\end{tdefinition}}
+
+\newtheorem{tproposition}{Proposition}
+\newenvironment{proposition}{%
+\begin{tproposition}
+}{\end{tproposition}}
+
+\newtheorem{tremark}{Remark}
+\newenvironment{remark}{%
+\begin{tremark}
+}{\end{tremark}}
+
+\renewenvironment{proof}{\begin{trivlist}%
+\vspace{-.3cm}
+\item[\hskip \labelsep {\bfseries Proof.}]
+}{\end{trivlist}}
+
+\renewcommand{\matrix}[1]{\begin{bmatrix}{#1}\end{bmatrix}}
+\newenvironment{tmatrix}{\left[\begin{smallmatrix}}{\end{smallmatrix}\right]}
+
+\graphicspath{{figures/}}
+\newcommand{\figref}[1]{Fig.~\ref{#1}}
+
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\renewcommand{\subsectionmark}[1]{\markright{#1}{}}
+
+\newenvironment{enums}{
+\begin{enumerate}
+}{\end{enumerate}}
+
+
+\newcommand{\ctan}{\mathrm{ctan}}

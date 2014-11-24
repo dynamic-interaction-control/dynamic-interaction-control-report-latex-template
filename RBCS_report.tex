@@ -1,0 +1,135 @@
+\documentclass[a4paper,twoside]{article}
+\usepackage[latin1]{inputenc} % ou \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} % ou \usepackage[OT1]{fontenc}
+\usepackage{RR}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{epsfig}
+%\usepackage{theorem}
+\usepackage{fancybox}
+\usepackage{shadow}
+\usepackage{float}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{psfrag}
+\usepackage{psboxit}
+
+\oddsidemargin 2mm
+\evensidemargin -1mm
+\textwidth 460 pt
+\headheight 8.67pt
+%\topmargin -15pt
+\textheight 616pt 
+
+\bibliographystyle{IEEEtran} 
+
+\def \g {{\mathfrak g}}
+\def \so {{\mathfrak s}{\mathfrak o}}
+\def \h {{\mathfrak h}}
+\def \Ad {\textnormal{Ad}}
+\def \ad {\textnormal{ad}}
+\def \ads {\textnormal{ads}}
+\def \RR {{\mathbb R}}
+\def \NN {{\mathbb N}}
+\def \ZZ {{\mathbb Z}} 
+\def \TT {{\mathbb T}}
+\def \UU {{\mathbb S}}
+\def \eps {\varepsilon}
+\def \ldef{:=}
+\def \finproof{\hfill\hbox{\vrule width1.0ex height1.5ex}}
+\def \nb {\bar n}
+\def \u {{\mathfrak u}}
+\def \se {{\mathfrak se}}
+\def \dg {\tnm{d}_G}
+\def \bg {\tnm{B}_G}
+\def \items {$\_$}
+\def \lvec{\overrightarrow}
+\def \Lie {\textnormal{Lie}}
+\def \span {\textnormal{span}}
+\def \dist {\textnormal{dist}}
+\def \SO {{\mathbb S}{\mathbb O}}
+\def \bx {{\mathbf X}}
+\def \SE {{\mathbb S}{\mathbb E}}
+
+\newcommand{\tnm}[1]{\textnormal{#1}}
+
+
+%%\usepackage[frenchb]{babel} % optionnel
+%\RRNo{Not published yet}
+%%
+%% publication date
+\RRdate{Date: Month Year}
+%%
+%% The case of several versions
+%% \RRversion{2}
+%% publication date of the version 2
+%% \RRdater{November 2008}
+%%
+\RRauthor{% the authors
+Author 1 \thanks{The author is with Italian Institute of Technology, Genoa, Italy.}%
+\and 
+Author 2 \thanks{The author is with Italian Institute of Technology, Genoa, Italy.}%
+ % \thanks[sfn]\UUhared foot note}%
+
+}
+%% This appears at each page.
+%\authorhead{Grimm \& Louarn \& others}
+\authorhead{Author 1 \& Author 2}
+
+%% The following must be like that: empty
+\RRtitle{}
+%% English titles
+\RRetitle{Research report title}
+%%
+\titlehead{Research report title}
+\RRabstract{}
+%%
+
+\RRkeyword{Keywords}
+%%
+% \RRprojet{Apics}  % cas d'un seul projet
+\RRprojet{Nonlinear control group}
+
+\RCSophia % Sophia Antipolis M\'editerran\'ee
+
+\include{header}
+
+% 	4.77in == \the\linewidth
+
+%%
+\begin{document}
+\RRNo{0}
+%%
+\makeRR   % cas d'un rapport de recherche
+%\makeRT % cas d'un rapport technique.
+%% a partir d'ici, chacun fait comme il le souhaite
+
+  
+\tableofcontents 
+\newpage
+
+\section{Introduction}
+
+
+\section{Notation and recalls}
+\label{sec-rec}
+
+
+\subsection{Subsection 1}
+
+\subsection{Subsection 2}
+
+\section{Section 2}
+
+
+	\newpage
+	%\bibliographystyle{IEEEtran}
+% 	\renewcommand{\bibname}{References}
+	\addcontentsline{toc}{section}{References}
+	%\bibliography{bibliography/ref_example}
+
+
+\end{document}
+\endinput
+%%
+%% End of file `squelette-rr.tex'.
