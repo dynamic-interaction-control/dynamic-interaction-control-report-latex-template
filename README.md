@@ -32,5 +32,5 @@ Depending on you operating systems there are different ways to obtain the requir
 
 #### Debian/Ubuntu
 ~~~
-sudo apt-get install cmake texlive-latex-recommended texlive-latex-extra texlive-publishers texlive-science
+sudo apt-get install cmake texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra texlive-publishers texlive-science
 ~~~
