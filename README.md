@@ -1,7 +1,7 @@
-RBCS Report LaTeX template
+DIC Report LaTeX template
 ==========================
 
-This repository contains the template for RBCS reports. 
+This repository contains the template for DIC reports. 
 It also contains an example of a LaTeX CMake-based build system
 using [UseLATEX](http://www.cmake.org/Wiki/CMakeUserUseLATEX).
 Using CMake it is possible to avoid some limitations of LaTeX builds,
@@ -11,8 +11,8 @@ for example enabling out-of-source builds.
 
 ### Linux/OS X
 ~~~
-git clone https://github.com/traversaro/rbcs-report-latex-template.git
-cd rbcs-report-latex-template
+git clone https://github.com/dynamic-interaction-control/dynamic-interaction-control-report-latex-template
+cd dynamic-interaction-control-report-latex-template
 mkdir build
 cd build
 ccmake ..
