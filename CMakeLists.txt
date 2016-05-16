@@ -4,7 +4,7 @@ project(UseLATEX_DOC NONE)
 
 include(cmake/UseLATEX.cmake)
 
-add_latex_document(RBCS_report.tex
+add_latex_document(DIC_report.tex
                     INPUTS header.tex
                            newrap.tex
                            save.tex
